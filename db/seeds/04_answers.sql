@@ -46,6 +46,7 @@ INSERT INTO answers (question_id, answer, isCorrect) VALUES (12, 'Washington DC'
 INSERT INTO answers (question_id, answer, isCorrect) VALUES (12, 'Philidelhpia', FALSE);
 INSERT INTO answers (question_id, answer, isCorrect) VALUES (12, 'New York', FALSE);
 
+
 INSERT INTO answers (question_id, answer, isCorrect) VALUES (13, '1867', TRUE);
 INSERT INTO answers (question_id, answer, isCorrect) VALUES (13, '1776', FALSE);
 INSERT INTO answers (question_id, answer, isCorrect) VALUES (13, '1812', FALSE);
@@ -112,5 +113,3 @@ INSERT INTO answers (question_id, answer, isCorrect) VALUES (27, 'Mitochrondrion
 INSERT INTO answers (question_id, answer, isCorrect) VALUES (28, 'Cellular duplication', FALSE);
 INSERT INTO answers (question_id, answer, isCorrect) VALUES (28, 'Meisosis', FALSE);
 INSERT INTO answers (question_id, answer, isCorrect) VALUES (28, 'Mitosis', TRUE);
-
-
