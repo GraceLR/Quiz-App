@@ -33,14 +33,14 @@ module.exports = (db) => {
 
   });
   router.post("/quizzes", (req, res) => {
-    let query = `INSERT INTO quizzes (user_id, name, description, isPrivate)
+    let query = `INSERT INTO quizzes (user_id, name, description, category, isPrivate)
                 VALUES ($1, $2, $3, $4) RETURNING id`;
     let values = [req.params.userid, req.body.name, req.body.description, req.body.isPrivate];
     db.query(query, values)
       .then(data => {
         const quiz = data.rows;
         let quizid = data.rows[0].id
-        res.redirect(`/quiz/${quizid}/questions`);
+        res.redirect(`/quiz/${quizid}/questions`); //redirect to proper url, just a placeholder
       })
       .catch(err => {
         res
