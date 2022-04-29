@@ -32,37 +32,54 @@ module.exports = (db) => {
       });
 
   });
-
-  router.post("/", (req, res) => {
-
-    const params = [req.body];
-    console.log(params)
-
-    // db.query(`INSERT INTO quizzes (name, description, user_id, isPrivate) VALUES
-    // ($1, $2, $3, $4) returning *;`, params)
-    //   .then(data => {
-    //     const users = data.rows;
-
-    //     db.query(`INSERT INTO questions (name, description, quiz_id, isPrivate) VALUES
-    //     ($1, $2, $3, $4);`, params)  // the quiz_id
-    //       .then(data => {
-    //         const users = data.rows;
-    //         res.json({ users });
-
-    //       })
-    //       .catch(err => {
-    //         res
-    //           .status(500)
-    //           .json({ error: err.message });
-    //       });
-
-    //   });
-
+  router.post("/quizzes", (req, res) => {
+    let query = `INSERT INTO quizzes (user_id, name, description, isPrivate)
+                VALUES ($1, $2, $3, $4) RETURNING id`;
+    let values = [req.params.userid, req.body.name, req.body.description, req.body.isPrivate];
+    db.query(query, values)
+      .then(data => {
+        const quiz = data.rows;
+        let quizid = data.rows[0].id
+        res.redirect(`/quiz/${quizid}/questions`);
+      })
+      .catch(err => {
+        res
+          .status(500)
+          .json({ error: err.message });
+      });
     });
 
-  return router;
+
+
+
+//   db.query(`INSERT INTO quizzes (name, description, user_id, isPrivate) VALUES
+//   ($1, $2, $3, $4) returning *;`, params)
+//     .then(data => {
+//       const users = data.rows;
+
+//       db.query(`INSERT INTO questions (name, description, quiz_id, isPrivate) VALUES
+//       ($1, $2, $3, $4);`, params)  // the quiz_id
+//         .then(data => {
+//           const users = data.rows;
+//           res.json({ users });
+
+//         })
+//         .catch(err => {
+//           res
+//             .status(500)
+//             .json({ error: err.message });
+//         });
+
+//     });
+
+//   });
+
+return router;
 
 };
+
+
+
 
 // copy from apiRoutes
 // create database.js
