@@ -10,37 +10,31 @@ const router  = express.Router();
 
 module.exports = (db) => {
 
+  router.get("/:quizid/questions", (req, res) => {
+    req.session.quiz_id = req.params.quizid;
+    let templateVar = { quizId: req.params.quizid};
+    res.render('../views/questions', templateVar);
+  })
 
-  router.get("/quizzes", (req, res) => {
-    res.render("createquizQuizzes");
-  });
+  router.get("/:quizid/questions/:questionid", (req, res) => {
+    db.query(`SELECT question FROM questions WHERE id = $1`, [req.params.questionid])
+    .then(data => {
+      let question = data.rows[0].question;
+      let templateVars = {quiz_id: req.params.quizid, question_id: req.params.questionid, question};
+      res.render('../views/answers', templateVars);
+    })
+  })
 
-
-  router.get("/all", (req, res) => {
-
-    db.query(`SELECT * FROM quizzes
-    join questions on quizzes.id = questions.quiz_id
-    join answers on questions.id = answers.question_id;`) // need to fetch quiz, qustions, answers
-      .then(data => {
-        console.log(data.rows)
-        res.json(data.rows);
-      })
-      .catch(err => {
-        res
-          .status(500)
-          .json({ error: err.message });
-      });
-
-  });
-  router.post("/quizzes", (req, res) => {
-    let query = `INSERT INTO quizzes (user_id, name, description, category, isPrivate)
-                VALUES ($1, $2, $3, $4) RETURNING id`;
-    let values = [req.params.userid, req.body.name, req.body.description, req.body.isPrivate];
+  router.post("/:quizid/questions", (req, res) => {
+    let query = `INSERT INTO questions (quiz_id, question)
+                VALUES ($1, $2) RETURNING *`;
+    let values = [req.params.quizid, req.body.question];
+    req.session.quiz_id = req.params.quizid;
     db.query(query, values)
       .then(data => {
-        const quiz = data.rows;
-        let quizid = data.rows[0].id
-        res.redirect(`/quiz/${quizid}/questions`); //redirect to proper url, just a placeholder
+        const question = data.rows;
+        let questionID = question[0].id
+        res.redirect(`/quiz/${req.params.quizid}/questions/${questionID}`);
       })
       .catch(err => {
         res
@@ -49,7 +43,35 @@ module.exports = (db) => {
       });
     });
 
+  return router;
+};
 
+
+
+
+
+
+    // router.get("/quizzes", (req, res) => {
+    //   res.render("createquizQuizzes");
+    // });
+
+
+    // router.get("/all", (req, res) => {
+
+    //   db.query(`SELECT * FROM quizzes
+    //   join questions on quizzes.id = questions.quiz_id
+    //   join answers on questions.id = answers.question_id;`) // need to fetch quiz, qustions, answers
+    //     .then(data => {
+    //       console.log(data.rows)
+    //       res.json(data.rows);
+    //     })
+    //     .catch(err => {
+    //       res
+    //         .status(500)
+    //         .json({ error: err.message });
+    //     });
+
+    // });
 
 
 //   db.query(`INSERT INTO quizzes (name, description, user_id, isPrivate) VALUES
@@ -74,9 +96,9 @@ module.exports = (db) => {
 
 //   });
 
-return router;
+// return router;
 
-};
+// };
 
 
 
