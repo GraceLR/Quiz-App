@@ -22,7 +22,7 @@ module.exports = (db) => {
     join questions on quizzes.id = questions.quiz_id
     join answers on questions.id = answers.question_id;`) // need to fetch quiz, qustions, answers
       .then(data => {
-        console.log(data.rows)
+        console.log(data.rows);
         res.json(data.rows);
       })
       .catch(err => {
@@ -36,7 +36,7 @@ module.exports = (db) => {
   router.post("/", (req, res) => {
 
     const params = [req.body];
-    console.log(params)
+    console.log(params);
 
     // db.query(`INSERT INTO quizzes (name, description, user_id, isPrivate) VALUES
     // ($1, $2, $3, $4) returning *;`, params)
@@ -58,7 +58,7 @@ module.exports = (db) => {
 
     //   });
 
-    });
+  });
 
   return router;
 
