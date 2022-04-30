@@ -14,7 +14,7 @@ const db = new Client(dbParams);
 // const client = new Client();
 
 // Loads the schema files from db/schema
-const runSchemaFiles = async () => {
+const runSchemaFiles = async() => {
   console.log(chalk.cyan(`-> Loading Schema Files ...`));
   const schemaFilenames = fs.readdirSync("./db/schema");
 
@@ -25,7 +25,7 @@ const runSchemaFiles = async () => {
   }
 };
 
-const runSeedFiles = async () => {
+const runSeedFiles = async() => {
   console.log(chalk.cyan(`-> Loading Seeds ...`));
   const schemaFilenames = fs.readdirSync("./db/seeds");
 
@@ -36,7 +36,7 @@ const runSeedFiles = async () => {
   }
 };
 
-const runResetDB = async () => {
+const runResetDB = async() => {
   try {
     dbParams.host &&
       console.log(`-> Connecting to PG on ${dbParams.host} as ${dbParams.user}...`);

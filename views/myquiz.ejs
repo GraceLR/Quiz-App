@@ -21,7 +21,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/timeago.js/4.0.2/timeago.min.js"></script>
 
     <!-- App JS -->
-    <script type="text/javascript" src="/scripts/createQuiz.js"></script>
+    <script type="text/javascript" src="/scripts/myquiz.js"></script>
   </head>
 
   <body>
@@ -35,13 +35,26 @@
 
         <h2 id="error"></h2>
 
-        <form class="form" id="form" action="/createquiz/quizzes" method="POST">
+
+        <form class="quizinfoform" id="quizinfoform" action="/quiz/quizinfo" method="POST">
           <!-- <label for="tweet-text">What are you humming about?</label> -->
-          <textarea name="text" id="question-text" placeholder="Please type your question here." rows="3" cols="67"></textarea>
-          <!-- answers need to add false true -->
-          <textarea name="text" id="answer-text" placeholder="A" rows="1" cols="67"></textarea>
-          <textarea name="text" id="answer-text" placeholder="B" rows="1" cols="67"></textarea>
-          <textarea name="text" id="answer-text" placeholder="C" rows="1" cols="67"></textarea>
+          <textarea name="quizname" id="quizname" placeholder="Quiz name" rows="3" cols="67"></textarea>
+          <textarea name="quizdescription" id="quizdescription" placeholder="Quiz description" rows="1" cols="67"></textarea>
+          <textarea name="quizisprivate" id="quizisprivate" placeholder="isprivate" rows="1" cols="67"></textarea>
+          <div>
+            <button type="submit">Add quiz info to my quiz</button>
+            <!-- <output name="counter" class="counter" id="counter" for="question-text">140</output> -->
+          </div>
+        </form>
+
+
+        <form class="questionsform" id="questionsform" action="/quiz/questions" method="POST">
+          <!-- <label for="tweet-text">What are you humming about?</label> -->
+          <textarea name="quizquestion" id="quizquestion" placeholder="Please type your question here." rows="3" cols="67"></textarea>
+          <textarea name="category" id="category" placeholder="Category of the question." rows="1" cols="67"></textarea>
+          <textarea name="correctAnswer" id="correctAnswer" placeholder="Correct answer." rows="1" cols="67"></textarea>
+          <textarea name="wrongAnswer1" id="wrongAnswer1" placeholder="Wrong answer." rows="1" cols="67"></textarea>
+          <textarea name="wrongAnswer2" id="wrongAnswer2" placeholder="Wrong answer." rows="1" cols="67"></textarea>
           <div>
             <button type="submit">Add to my quiz</button>
             <!-- <output name="counter" class="counter" id="counter" for="question-text">140</output> -->
@@ -51,8 +64,14 @@
       </section>
 
 
-      <nav>
-        <h4>Catogary:</h4>
+      <nav id="categoryform" class="categoryform">
+        <label for="Category">Category:</label>
+        <select name="categoryselect" id="categoryselect">
+          <option value="defaultvalue" class="categorydefault" id="categorydefault">Select a Category</option>
+          <% for(const cat of categories) { %>
+            <option><%= cat['category'] %></option>
+        <% } %>
+        </select>
       </nav>
 
 
