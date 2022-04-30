@@ -16,10 +16,15 @@ app.use(express.json());
 const { Pool } = require("pg");
 const dbParams = require("./lib/db.js");
 const db = new Pool(dbParams);
+<<<<<<< HEAD
 db.connect(() => {
   console.log('connected to database');
 });
 
+=======
+console.log(dbParams);
+db.connect();
+>>>>>>> b1c66ba69099ecb3a12e4bdcc5e84f39d81913a7
 
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
 // 'dev' = Concise output colored by response status for development use.
@@ -47,8 +52,16 @@ app.use(express.static("public"));
 // Note: Feel free to replace the example routes below with your own
 // const usersRoutes = require("./routes/users");
 // const widgetsRoutes = require("./routes/widgets");
+<<<<<<< HEAD
 const quizRouts = require("./routes/quiz");
 
+=======
+const createquizRouts = require("./routes/createquiz");
+const apiQuiziesRoute = require("./routes/api/quizzes");
+
+// api routes
+app.use("/api/quizzes", apiQuiziesRoute(db));
+>>>>>>> b1c66ba69099ecb3a12e4bdcc5e84f39d81913a7
 
 
 
@@ -57,8 +70,12 @@ const quizRouts = require("./routes/quiz");
 
 // app.use("/api/users", usersRoutes(db));
 // app.use("/api/widgets", widgetsRoutes(db));
+<<<<<<< HEAD
 app.use("/quiz", quizRouts(db));
 
+=======
+app.use("/createquiz", createquizRouts(db));
+>>>>>>> b1c66ba69099ecb3a12e4bdcc5e84f39d81913a7
 
 // Note: mount other resources here, using the same pattern above
 
@@ -69,6 +86,10 @@ app.use("/quiz", quizRouts(db));
 
 app.get("/", (req, res) => {
   res.render("index");
+});
+
+app.get("/startQuiz", (req, res) => {
+  res.render("startQuiz");
 });
 
 app.listen(PORT, () => {
