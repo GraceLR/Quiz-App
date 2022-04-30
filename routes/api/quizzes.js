@@ -14,7 +14,7 @@ module.exports = (db) => {
     let quizzes = `
       select * from quizzes
       order by id
-      limit 4
+      limit 8
     `;
     console.log(quizzes);
     let questionIds = [];
