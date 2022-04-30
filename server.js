@@ -12,6 +12,7 @@ const morgan = require("morgan");
 const { Pool } = require("pg");
 const dbParams = require("./lib/db.js");
 const db = new Pool(dbParams);
+console.log(dbParams);
 db.connect();
 
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
@@ -38,10 +39,10 @@ app.use(express.static("public"));
 // const usersRoutes = require("./routes/users");
 // const widgetsRoutes = require("./routes/widgets");
 const createquizRouts = require("./routes/createquiz");
-const apiQuiziesRoute = require("./routes/api/quizes");
+const apiQuiziesRoute = require("./routes/api/quizzes");
 
 // api routes
-app.use("/api/quizes", apiQuiziesRoute(db));
+app.use("/api/quizzes", apiQuiziesRoute(db));
 
 
 
