@@ -1,5 +1,7 @@
 // load .env data into process.env
 require("dotenv").config();
+const bodyParser = require('body-parser');
+
 
 // Web server config
 const PORT = process.env.PORT || 8080;
@@ -7,6 +9,8 @@ const sassMiddleware = require("./lib/sass-middleware");
 const express = require("express");
 const app = express();
 const morgan = require("morgan");
+app.use(express.json());
+
 
 // PG database client/connection setup
 const { Pool } = require("pg");
@@ -24,6 +28,9 @@ app.use(morgan("dev"));
 
 app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
 
 app.use(
   "/styles",
@@ -40,18 +47,17 @@ app.use(express.static("public"));
 // Note: Feel free to replace the example routes below with your own
 // const usersRoutes = require("./routes/users");
 // const widgetsRoutes = require("./routes/widgets");
-const createquizRouts = require("./routes/createquiz");
-/createquiz/All
-/createquiz/quizzes
+const quizRouts = require("./routes/quiz");
+
 
 
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 
-app.use("/api/users", usersRoutes(db));
-app.use("/api/widgets", widgetsRoutes(db));
-app.use("/createquiz", createquizRouts(db));
+// app.use("/api/users", usersRoutes(db));
+// app.use("/api/widgets", widgetsRoutes(db));
+app.use("/quiz", quizRouts(db));
 
 
 // Note: mount other resources here, using the same pattern above

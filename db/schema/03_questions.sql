@@ -3,4 +3,5 @@ CREATE TABLE questions (
   id SERIAL PRIMARY KEY NOT NULL,
   quiz_id INTEGER NOT NULL REFERENCES quizzes(id) ON DELETE CASCADE,
   question TEXT NOT NULL
+  category VARCHAR(400) NOT NULL
 );
