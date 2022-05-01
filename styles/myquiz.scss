@@ -1,0 +1,46 @@
+/* importing google fonts */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+@import "./header";
+
+
+.quizform  {
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+  align-items: center;
+  border-color: rgb(0, 0, 0);
+  border-radius: 10px;
+}
+
+main-container.container {
+  display: flex;
+  flex-direction: column;
+  margin: 50px;
+  align-items: center;
+  border-color: white;
+  .links-container {
+    display: flex;
+    flex-direction: row-reverse;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    .quiz-link {
+      border: 1px dotted grey;
+      border-radius: 5px;
+      padding: 20px;
+      background-color: blue;
+      text-align: center;
+      width: 300px;
+      margin: 10px;
+    }
+    .quiz-link:hover {
+      background-color: navy;
+      color: whitesmoke;
+      a {
+        color: whitesmoke;
+      }
+    }
+  }
+}
+
