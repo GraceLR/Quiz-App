@@ -43,19 +43,19 @@ let questions = [
       "Statement Question Language",
       "Structured Query Language"
     ]
-  },
-  {
-    numb: 5,
-    question: "What does XML stand for?",
-    answer: "eXtensible Markup Language",
-    options: [
-      "eXtensible Markup Language",
-      "eXecutable Multiple Language",
-      "eXTra Multi-Program Language",
-      "eXamine Multiple Language"
-    ]
-  },
-  // you can uncomment the below codes and make duplicate as more as you want to add question
+  // },
+  // {
+  //   numb: 5,
+  //   question: "What does XML stand for?",
+  //   answer: "eXtensible Markup Language",
+  //   options: [
+  //     "eXtensible Markup Language",
+  //     "eXecutable Multiple Language",
+  //     "eXTra Multi-Program Language",
+  //     "eXamine Multiple Language"
+  //   ]
+  // },
+  // // you can uncomment the below codes and make duplicate as more as you want to add question
   // but remember you need to give the numb value serialize like 1,2,3,5,6,7,8,9.....
 
 //   {

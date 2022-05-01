@@ -9,10 +9,12 @@ const express = require('express');
 const router  = express.Router();
 
 module.exports = (db) => {
-  router.get("/", (req, res) => {
-    console.log(req.body);
+  router.get("/:id", (req, res) => {
+    console.log(req.query, req.params, req.quizId);
+    const { id } = req.params;
     let quizzes = `
       select * from quizzes
+      where id = $1
       order by id
     `;
     console.log(quizzes);
@@ -22,7 +24,7 @@ module.exports = (db) => {
       questions: {},
       answers: {}
     };
-    db.query(quizzes)
+    db.query(quizzes, [id])
       .then(data => {
         const ids = data.rows.map((quiz) => parseInt(quiz.id));
         console.log(ids);
