@@ -160,6 +160,8 @@ $(() => {
   $("#questionsform").hide();
   $("#questions-container").hide();
   $("#categoryform").hide();
+  $("#myquiz-container").hide();
+  $("#createquiz").hide();
 
   $("#quizinfoform").on("submit", function(event) {
 
@@ -196,6 +198,8 @@ $(() => {
     $("#questionsform").show();
     $("#questions-container").show();
     $("#categoryform").show();
+    $("#myquiz-container").show();
+    $("#createquiz").show();
 
     $.post('/quiz/quizinfo', {quizName, quizDescription, quizIsPrivate})
       .then(data => {
@@ -319,5 +323,7 @@ $(() => {
       });
 
   });
+
+
 
 });

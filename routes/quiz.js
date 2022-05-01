@@ -11,6 +11,12 @@ const router  = express.Router();
 
 module.exports = (db) => {
 
+  const generateRandomString = (length) => {
+    let result = '';
+    const chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    for (let i = 0; i < length; i++) result += chars[Math.floor(Math.random() * chars.length)];
+    return result;
+  };
 
   router.get("/myquiz", (req, res) => {
 
@@ -18,7 +24,7 @@ module.exports = (db) => {
     .then(data => {
       console.log(data.rows)
       // const ca
-      res.render("myquiz", {categories: data.rows});
+      res.render("myquiz", { categories: data.rows, random: generateRandomString(15)});
     })
     .catch(err => {
       res
@@ -175,8 +181,11 @@ module.exports = (db) => {
 
   });
 
+  router.get("/kanem/startquiz/:random", (req, res) => {
 
+    res.render("kanemstartquizrandom");
 
+  });
 
   return router;
 
