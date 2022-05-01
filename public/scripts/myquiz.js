@@ -14,8 +14,8 @@ function createQuestionElement(questionData) {
 
   const $question = $(
     `<article class="question">
-      <div>
-      <span>${escape(questionData)}</span>
+      <div class="questionfromdb" id="questionfromdb">
+        <span>${escape(questionData)}</span>
         <button name="questionfromdbbutton" id="questionfromdbbutton" type="submit">Add to my quiz</button>
       </div>
     </article>`);
@@ -239,24 +239,43 @@ $(() => {
   });
 
 
+  $(document).on('click', '#questionfromdbbutton', function() {
 
-  // $( "#questionfromdbbutton" ).click(() => {
 
-  //   // what is the quiestion ? answers ?
-  //   $.post('/quiz/questions', {myQuizId, quizQuestion, correctAnswer, wrongAnswer1, wrongAnswer2})
-  //   .then(() => {
+    const questionText = $(this).siblings('span').text();
+    // seems like quizzes questions many to many is neccesary.
+    // ignore so far
 
-  //     // fetchQuestions();
-  //     // console.log('myQuizId#########', myQuizId)
-  //     fetchMyQuiz(myQuizId);
+    $.ajax({
+      url: '/quiz/data/buttonaddquestion',
+      method: 'GET',
+      data: {questionText: questionText},
+      dataType: 'json'
+    }).then(questionData => {
 
-  //   })
-  //   .catch(err => {
-  //     console.log(err);
-  //   });
+      const quizQuestion = questionData[0].question;
+      const category = questionData[0].category;
+      const correctAnswer = questionData[0].answer;
+      const wrongAnswer1 = questionData[1].answer;
+      const wrongAnswer2 = questionData[2].answer;
 
-  // });
+      $.post('/quiz/questions', {myQuizId, quizQuestion, category, correctAnswer, wrongAnswer1, wrongAnswer2})
+      .then(() => {
 
+        fetchMyQuiz(myQuizId);
+
+      })
+      .catch(err => {
+        console.log(err);
+      });
+
+    }).catch(err => {
+
+      console.log(err);
+
+    });
+
+  });
 
 
   $("#questionsform").on("submit", function(event) {

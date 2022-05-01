@@ -67,8 +67,6 @@ module.exports = (db) => {
 
   router.get("/data/filteredquestions", (req, res) => {
 
-    console.log(req.query.catFilter);
-
     db.query(`SELECT DISTINCT question FROM questions WHERE category LIKE '%' || $1 || '%';`, [req.query.catFilter])
       .then(data => {
         res.json(data.rows);
@@ -181,9 +179,29 @@ module.exports = (db) => {
 
   });
 
-  router.get("/kanem/startquiz/:random", (req, res) => {
+  router.get("/startquiz/:random", (req, res) => {
 
-    res.render("kanemstartquizrandom");
+    res.render("startQuiz");
+
+  });
+
+  router.get("/data/buttonaddquestion", (req, res) => {
+
+    // seems like quizzes questions many to many is neccesary.
+    // ignore so far
+    // there will be multiple records if same question has multiple category.
+    db.query(`SELECT temp.question, temp.category, answer, isCorrect from
+    (SELECT id, question, category FROM questions WHERE question = $1 LIMIT 1) as temp
+    JOIN answers on temp.id = answers.question_id;`,
+    [req.query.questionText])
+      .then(data => {
+        res.json(data.rows);
+      })
+      .catch(err => {
+        res
+          .status(500)
+          .json({ error: err.message });
+      });
 
   });
 
