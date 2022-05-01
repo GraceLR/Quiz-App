@@ -9,9 +9,60 @@
   flex-direction: column;
   margin: 10px;
   align-items: center;
+  background: aliceblue;
+      border: 1px solid #84c5fe;
+      border-radius: 5px;
+      padding: 8px 15px;
+      font-size: 17px;
+      margin-bottom: 15px;
+}
+.quizadd  {
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+  align-items: center;
   border-color: rgb(0, 0, 0);
   border-radius: 10px;
 }
+.questionsform {
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+  align-items: center;
+  background: aliceblue;
+      border: 1px solid #84c5fe;
+      border-radius: 5px;
+      padding: 8px 15px;
+      font-size: 17px;
+      margin-bottom: 15px;
+}
+.categoryform {
+  display: flex;
+  flex-direction: column;
+  margin: 5px;
+  align-items: center;
+  background: aliceblue;
+      border: 1px solid #84c5fe;
+      border-radius: 5px;
+      padding: 2px;
+      font-size: 17px;
+      margin-bottom: 8px;
+}
+.question {
+  display: flex;
+  flex-direction: column;
+  margin: 5px;
+  align-items: center;
+  color:rgb(0, 0, 0);
+  background: aliceblue;
+      border: 1px solid #84c5fe;
+      border-radius: 5px;
+      padding: 2px;
+      font-size: 17px;
+      margin-bottom: 8px;
+}
+
+
 
 main-container.container {
   display: flex;
