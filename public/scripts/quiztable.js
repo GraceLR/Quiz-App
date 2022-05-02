@@ -6,34 +6,30 @@ $(document).ready(function($) {
     const response = await fetch('/api/quizzes');
     const { quizzes, questions, answers } = await response.json();
 
-    const quizzesEl = $('.quizzes');
-    for (let i = 0; i < quizzes.length; i += 1) {
-      const quizId = `quiz_${quizzes[i].id}`;
-      quizzesEl.append(`<div id="${quizId}"></div>`);
-
-      const questionsMap = questions[quizzes[i].id].map((item) => {
-        return {
-          q: item.question,
-          options: answers[item.id].map((answer) => answer.answer),
-          correctIndex: answers[item.id].findIndex((answer) => answer.iscorrect)
-        };
-      });
-
-      $(`#${quizId}`).quiz({
-        questions: questionsMap,
-        questions: questionsMap
-      });
-    }
-
-    $('#quiz_1').find('#quiz-restart-btn').click();
-    $('.quizzes').find('a').click(function(e) {
-      e.preventDefault();
-    });
-
     for (const quiz of quizzes) {
-      const quizId = `quiz_${quiz.id}`;
+      const divId = `quiz_${quiz.id}`;
+      const quizQuestions = questions[quiz.id];
+      const quizAnswers = answers[quizQuestions[0].id];
       console.log(quiz.name);
-      $(`#${quizId}`).prepend(`<h3>${quiz.name}</h3>`);
+
+      const htmlAnswers = quizAnswers.map((answer, index) => {
+        return `<li><a href="#" data-index="${index}">${answer.answer}</a></li>`;
+      }).join('');
+      const htmlQuestions = `
+      <div class="question-container">
+        <p class="question">${quizQuestions[0].question}</p>
+        <ul class="answers">
+          ${htmlAnswers}
+        </ul>
+      </div>`;
+
+      const htmlQuiz = `
+        <div id="${divId}" class="quiz-container quiz-questions-state">
+          <h3>${quiz.name}</h3>
+          ${htmlQuestions}
+        </div>
+      `;
+      $(`.quizzes`).append(htmlQuiz);
     }
 
   };
