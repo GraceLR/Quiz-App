@@ -40,11 +40,11 @@ app.use(express.static("public"));
 // const widgetsRoutes = require("./routes/widgets");
 const createquizRouts = require("./routes/createquiz");
 const apiQuiziesRoute = require("./routes/api/quizzes");
-const apiQuizRoute = require("./routes/api/quiz");
+const apiGetQuizRoute = require("./routes/api/get-quiz");
 
 // api routes
 app.use("/api/quizzes", apiQuiziesRoute(db));
-app.use("/api/quiz", apiQuizRoute(db));
+app.use("/api/quiz", apiGetQuizRoute(db));
 
 
 
