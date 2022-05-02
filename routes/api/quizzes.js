@@ -13,7 +13,8 @@ module.exports = (db) => {
     console.log(req.body);
     let quizzes = `
       select * from quizzes
-      order by id
+      order by random()
+      limit 6
     `;
     console.log(quizzes);
     let questionIds = [];

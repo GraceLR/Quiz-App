@@ -20,6 +20,7 @@ $(document).ready(function($) {
       });
 
       $(`#${quizId}`).quiz({
+        questions: questionsMap,
         questions: questionsMap
       });
     }
@@ -28,6 +29,12 @@ $(document).ready(function($) {
     $('.quizzes').find('a').click(function(e) {
       e.preventDefault();
     });
+
+    for (const quiz of quizzes) {
+      const quizId = `quiz_${quiz.id}`;
+      console.log(quiz.name);
+      $(`#${quizId}`).prepend(`<h3>${quiz.name}</h3>`);
+    }
 
   };
 
