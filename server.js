@@ -12,6 +12,7 @@ const morgan = require("morgan");
 const { Pool } = require("pg");
 const dbParams = require("./lib/db.js");
 const db = new Pool(dbParams);
+console.log(dbParams);
 db.connect();
 
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
@@ -38,16 +39,20 @@ app.use(express.static("public"));
 // const usersRoutes = require("./routes/users");
 // const widgetsRoutes = require("./routes/widgets");
 const createquizRouts = require("./routes/createquiz");
-/createquiz/All
-/createquiz/quizzes
+const apiQuiziesRoute = require("./routes/api/quizzes");
+const apiQuizRoute = require("./routes/api/quiz");
+
+// api routes
+app.use("/api/quizzes", apiQuiziesRoute(db));
+app.use("/api/quiz", apiQuizRoute(db));
 
 
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 
-app.use("/api/users", usersRoutes(db));
-app.use("/api/widgets", widgetsRoutes(db));
+// app.use("/api/users", usersRoutes(db));
+// app.use("/api/widgets", widgetsRoutes(db));
 app.use("/createquiz", createquizRouts(db));
 
 // Note: mount other resources here, using the same pattern above
@@ -59,6 +64,10 @@ app.use("/createquiz", createquizRouts(db));
 
 app.get("/", (req, res) => {
   res.render("index");
+});
+
+app.get("/quiz/:id", (req, res) => {
+  res.render("startQuiz");
 });
 
 app.listen(PORT, () => {

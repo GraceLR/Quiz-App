@@ -5,5 +5,6 @@ CREATE TABLE quizzes (
   user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
   name VARCHAR(255) NOT NULL,
   description TEXT,
+  category TEXT,
   isPrivate BOOLEAN NOT NULL DEFAULT FALSE
 );
