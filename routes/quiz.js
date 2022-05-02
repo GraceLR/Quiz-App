@@ -11,20 +11,13 @@ const router  = express.Router();
 
 module.exports = (db) => {
 
-  const generateRandomString = (length) => {
-    let result = '';
-    const chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    for (let i = 0; i < length; i++) result += chars[Math.floor(Math.random() * chars.length)];
-    return result;
-  };
-
   router.get("/myquiz", (req, res) => {
 
     db.query(`SELECT DISTINCT category FROM questions;`)
     .then(data => {
-      console.log(data.rows)
-      // const ca
-      res.render("myquiz", { categories: data.rows, random: generateRandomString(15)});
+
+      res.render("myquiz", { categories: data.rows});
+
     })
     .catch(err => {
       res
@@ -179,12 +172,6 @@ module.exports = (db) => {
 
   });
 
-  router.get("/startquiz/:random", (req, res) => {
-
-    res.render("startQuiz");
-
-  });
-
   router.get("/data/buttonaddquestion", (req, res) => {
 
     // seems like quizzes questions many to many is neccesary.
@@ -204,6 +191,7 @@ module.exports = (db) => {
       });
 
   });
+
 
   return router;
 
