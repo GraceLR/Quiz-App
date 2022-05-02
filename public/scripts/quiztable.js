@@ -21,6 +21,7 @@ $(document).ready(function($) {
 
       $(`#${quizId}`).quiz({
         questions: questionsMap,
+        questions: questionsMap
       });
     }
 
