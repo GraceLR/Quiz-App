@@ -48,11 +48,15 @@
       font-size: 17px;
       margin-bottom: 8px;
 }
+.questionfromdb {
+  display: flex;
+  justify-content: space-between;
+}
 .question {
   display: flex;
+  justify-content: space-between;
   flex-direction: column;
   margin: 5px;
-  align-items: center;
   color:rgb(0, 0, 0);
   background: aliceblue;
       border: 1px solid #84c5fe;
@@ -61,8 +65,19 @@
       font-size: 17px;
       margin-bottom: 8px;
 }
-
-
+.myquiz-container  {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  margin: 5px;
+  color: black;
+  background: aliceblue;
+      border: 1px solid #84c5fe;
+      border-radius: 5px;
+      padding: 2px;
+      font-size: 17px;
+      margin-bottom: 8px;
+}
 
 main-container.container {
   display: flex;
