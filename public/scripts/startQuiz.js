@@ -106,7 +106,8 @@ next_btn.onclick = ()=>{
 // },
 
 async function getQuestions() {
-  const quizId = window.location.pathname.replace('/quiz/', '');
+  const quizIdPlusRandom = window.location.pathname.replace('/quiz/', '');
+  const quizId = quizIdPlusRandom.substring(24);
   const response = await fetch(`/api/quiz/${quizId}`);
   const result = await response.json();
   console.log(result);
