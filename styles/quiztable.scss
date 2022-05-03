@@ -20,7 +20,9 @@
     margin: 2rem;
     color: #000;
     width: 500px;
-    height: 300px;
+    align-self: stretch;
+    box-shadow: 2px 2px 3px 0px rgb(0 0 0 / 50%);
+
 
     .question {
       font-size: 1.6rem;

@@ -47,9 +47,11 @@ app.use(express.static("public"));
 // const widgetsRoutes = require("./routes/widgets");
 
 const quizRouts = require("./routes/quiz");
+const apiQuiziesRoute = require("./routes/api/quizzes");
+const apiGetQuizRoute = require("./routes/api/get-quiz");
 
 // const createquizRouts = require("./routes/createquiz");
-const apiQuiziesRoute = require("./routes/api/quizzes");
+// const apiQuiziesRoute = require("./routes/api/quizzes");
 
 // api routes
 app.use("/api/quizzes", apiQuiziesRoute(db));
@@ -64,10 +66,8 @@ app.use("/api/quizzes", apiQuiziesRoute(db));
 // app.use("/api/widgets", widgetsRoutes(db));
 
 app.use("/quiz", quizRouts(db));
-
-// app.use("/createquiz", createquizRouts(db));
-
-// app.use("/quiz", quizRouts(db));
+app.use("/api/quizzes", apiQuiziesRoute(db));
+app.use("/api/quiz", apiGetQuizRoute(db));
 // Note: mount other resources here, using the same pattern above
 
 // Home page
@@ -79,9 +79,10 @@ app.get("/", (req, res) => {
   res.render("index");
 });
 
-app.get("/startQuiz", (req, res) => {
+app.get("/quiz/:idplusrandom", (req, res) => {
   res.render("startQuiz");
 });
+
 
 app.listen(PORT, () => {
   console.log(`Quiz app listening on port ${PORT}`);

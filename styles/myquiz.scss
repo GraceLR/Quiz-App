@@ -67,7 +67,7 @@
 }
 .myquiz-container  {
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   flex-direction: column;
   margin: 5px;
   color: black;
@@ -77,6 +77,18 @@
       padding: 2px;
       font-size: 17px;
       margin-bottom: 8px;
+}
+.parent {
+  border: 1px solid #84c5fe;
+  margin: 5px;
+  padding: 2px;
+  text-align: center;
+}
+.child  {
+  display: inline-block;
+  border: 1px solid #84c5fe;
+  padding: 2px;
+  vertical-align: middle;
 }
 
 main-container.container {

@@ -85,22 +85,21 @@
         </select>
       </nav>
 
-
-      <section class="questions-container" id="questions-container">
-      </section>
-
-      <section class="myquiz-container" id="myquiz-container">
-        <span>Quiz Preview</span>
-      </section>
-
-      <section name="createquiz" id="createquiz">
-
-        <a href="/quiz/startquiz/<%= random %>">
-          <button>Create Quiz</button>
-        </a>
-
-       </section>
-
+      <div class="parent" >
+        <div class="child"><section class="questions-container" id="questions-container">
+        </section>
+        </div>
+        <div class="child">
+        <section class="myquiz-container" id="myquiz-container">
+          <span>Quiz Preview</span>
+        </section>
+        </div>
+        <div class="child">
+        <section name="createquiz" id="createquiz">
+          <button type="button" name="createquizbutton" id="createquizbutton">Create Quiz</button>
+        </section>
+        </div>
+      </div>
       <!-- <form name="createquiz" id="createquiz" action="/quiz/kanem/startquizrandom" method="POST"></form> -->
 
     </main>

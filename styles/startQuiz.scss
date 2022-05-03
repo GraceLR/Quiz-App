@@ -8,15 +8,9 @@
   font-family: 'Poppins', sans-serif;
 }
 
-body {
-  width: 100%;
-  min-height: 100vh;
-  background: rgb(25, 62, 224)
-}
-
 ::selection {
   color: #fff;
-  background: rgb(25, 62, 224);
+  background: #287fc9;
 }
 
 .start_btn,
@@ -43,7 +37,7 @@ body {
 .start_btn button {
   font-size: 25px;
   font-weight: 500;
-  color: rgb(25, 62, 224);
+  color: #287fc9;
   padding: 15px 30px;
   outline: none;
   border: none;
@@ -85,7 +79,7 @@ body {
 
 .info_box .info-list .info span {
   font-weight: 600;
-  color: rgb(25, 62, 224);
+  color: #287fc9;
 }
 
 .info_box .buttons {
@@ -107,7 +101,7 @@ body {
   border: none;
   outline: none;
   border-radius: 5px;
-  border: 1px solid rgb(25, 62, 224);
+  border: 1px solid #287fc9;
   transition: all 0.3s ease;
 }
 
@@ -292,8 +286,8 @@ footer button {
   outline: none;
   color: #fff;
   border-radius: 5px;
-  background: rgb(25, 62, 224);
-  border: 1px solid rgb(25, 62, 224);
+  background: #287fc9;
+  border: 1px solid #287fc9;
   line-height: 10px;
   opacity: 0;
   pointer-events: none;
@@ -302,7 +296,7 @@ footer button {
 }
 
 footer button:hover {
-  background: rgb(25, 62, 224);
+  background: #287fc9;
 }
 
 footer button.show {
@@ -328,7 +322,7 @@ footer button.show {
 
 .result_box .icon {
   font-size: 100px;
-  color: rgb(25, 62, 224);
+  color: #287fc9;
   margin-bottom: 10px;
 }
 
@@ -364,13 +358,13 @@ footer button.show {
   border: none;
   outline: none;
   border-radius: 5px;
-  border: 1px solid rgb(25, 62, 224);
+  border: 1px solid #287fc9;
   transition: all 0.3s ease;
 }
 
 .buttons button.restart {
   color: #fff;
-  background: rgb(25, 62, 224);
+  background: #287fc9;
 }
 
 .buttons button.restart:hover {
@@ -379,8 +373,7 @@ footer button.show {
 }
 
 .buttons button.quit {
-  color: rgb(25, 62, 224);
-  background: #fff;
+  color: #287fc9;
 }
 
 .buttons button.quit:hover {
