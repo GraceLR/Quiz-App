@@ -58,7 +58,7 @@
           </div>
         </form>
 
-
+        <div id="fixed-div">
         <form class="questionsform" id="questionsform" action="/quiz/questions" method="POST">
            <!-- <label for="tweet-text">What are you humming about?</label> -->
           <textarea name="quizquestion" id="quizquestion" placeholder="Please type your question here." rows="3" cols="67"></textarea>
@@ -71,30 +71,34 @@
             <!-- <output name="counter" class="counter" id="counter" for="question-text">140</output> -->
           </div>
         </form>
-
+      </div>
       </section>
 
 
-      <nav id="categoryform" class="categoryform">
-        <label for="Category">Category:</label>
-        <select name="categoryselect" id="categoryselect">
-          <option value="defaultvalue" class="categorydefault" id="categorydefault">Select a Category</option>
-          <% for(const cat of categories) { %>
-            <option><%= cat['category'] %></option>
-        <% } %>
-        </select>
-      </nav>
 
       <div class="parent" >
-        <div class="child"><section class="questions-container" id="questions-container">
+        <div class="child">
+
+          <nav id="categoryform" class="categoryform">
+            <label for="Category">Category:</label>
+            <select name="categoryselect" id="categoryselect">
+              <option value="defaultvalue" class="categorydefault" id="categorydefault">Select a Category</option>
+              <% for(const cat of categories) { %>
+                <option><%= cat['category'] %></option>
+            <% } %>
+            </select>
+          </nav>
+
+
+
+        <section class="questions-container" id="questions-container">
         </section>
         </div>
         <div class="child">
         <section class="myquiz-container" id="myquiz-container">
           <span> <h3>Quiz Preview</h3></span>
         </section>
-        </div>
-        <div class="child">
+
         <section name="createquiz" id="createquiz">
           <button type="button" name="createquizbutton" id="createquizbutton">Create Quiz</button>
         </section>

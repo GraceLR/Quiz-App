@@ -28,7 +28,14 @@
   display: flex;
   flex-direction: column;
   margin: 10px;
+  justify-content: center;
   align-items: center;
+  padding: 3rem 5rem 1.5rem;
+  border-bottom: 3px solid rgb(15, 3, 84);
+  position: fixed; /* Set the navbar to fixed position */
+  top: 0; /* Position the navbar at the top of the page */
+  left: 50%;
+  margin-left: -30%; /* Negative half of width. */
   background: aliceblue;
       border: 1px solid #84c5fe;
       border-radius: 5px;
@@ -41,6 +48,7 @@
   flex-direction: column;
   margin: 5px;
   align-items: center;
+  color: black;
   background: aliceblue;
       border: 1px solid #84c5fe;
       border-radius: 5px;
@@ -99,6 +107,7 @@
   margin: 5px;
   padding: 2px;
   text-align: center;
+  margin-top: 15em;
 }
 .child  {
   display: inline-block;
