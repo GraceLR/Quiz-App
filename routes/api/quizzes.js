@@ -3,10 +3,13 @@ const router  = express.Router();
 
 module.exports = (db) => {
   router.get("/", (req, res) => {
-    console.log(req.body);
     let quizzes = `
-      select * from quizzes
-      order by random()
+      select distinct q.id, count(a.id) from quizzes q
+      LEFT JOIN questions qs ON q.id = qs.quiz_id
+      LEFT JOIN answers a ON qs.id = a.question_id
+      where qs.id is not null AND a.id is not null
+      group by q.id, qs.id
+      order by q.id desc
       limit 6
     `;
     console.log(quizzes);
@@ -17,16 +20,21 @@ module.exports = (db) => {
       answers: {}
     };
     db.query(quizzes)
-      .then(data => {
-        const ids = data.rows.map((quiz) => parseInt(quiz.id));
-        console.log(ids);
-        results.quizzes = data.rows;
+      .then((data) => {
+        const ids = data.rows.map((item) => parseInt(item.id));
+        return db.query(`
+          select * from quizzes
+          where id  = ANY($1::int[])
+          `, [ids]
+        );
+      }).then((quizzesData) => {
+        const ids = quizzesData.rows.map((quiz) => parseInt(quiz.id));
+        results.quizzes = quizzesData.rows;
         return db.query(`
             select * from questions
             where quiz_id = ANY($1::int[])
             order by id ASC
           `, [ids]);
-
       }).then((questions) => {
         questionIds = questions.rows.map((q) => parseInt(q.id));
 
