@@ -94,8 +94,8 @@ module.exports = (db) => {
     // console.log('params4', params4);
     // change the way privacy was set up
 
-    db.query(`INSERT INTO quizzes (user_id, name, description, isPrivate) VALUES
-    ($1, $2, $3, $4) RETURNING *;`, [1, params.quizName, params.quizDescription, params4])
+    db.query(`INSERT INTO quizzes (user_id, name, shortUrl, description, isPrivate) VALUES
+    ($1, $2, $3, $4, $5) RETURNING *;`, [1, params.quizName, params.shortUrl, params.quizDescription, params4])
       .then(data => {
 
         res.send(data.rows[0]);

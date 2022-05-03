@@ -7,6 +7,15 @@
  * jQuery is already loaded
  */
 
+const generateRandomString = (length) => {
+  let result = '';
+  const chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  for (let i = 0; i < length; i++) result += chars[Math.floor(Math.random() * chars.length)];
+  return result;
+};
+
+let shortUrl = generateRandomString(20);
+
 const escape = function(str) {
   let div = document.createElement("div");
   div.appendChild(document.createTextNode(str));
@@ -204,7 +213,8 @@ $(() => {
     $("#myquiz-container").show();
     $("#createquiz").show();
 
-    $.post('/quiz/quizinfo', {quizName, quizDescription, quizIsPrivate})
+    shortUrl = generateRandomString(20);
+    $.post('/quiz/quizinfo', {quizName, shortUrl, quizDescription, quizIsPrivate})
       .then(data => {
 
         myQuizId = data.id;
@@ -346,15 +356,9 @@ $(() => {
 
   });
 
-  const generateRandomString = (length) => {
-    let result = '';
-    const chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    for (let i = 0; i < length; i++) result += chars[Math.floor(Math.random() * chars.length)];
-    return result;
-  };
 
   $('#createquizbutton').click(function() {
 
-    window.location.href = '/quiz/' + myQuizId + generateRandomString(20);
+    window.location.href = `/quiz/${shortUrl}`;
   });
 });

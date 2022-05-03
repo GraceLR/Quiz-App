@@ -50,20 +50,6 @@ const quizRouts = require("./routes/quiz");
 const apiQuiziesRoute = require("./routes/api/quizzes");
 const apiGetQuizRoute = require("./routes/api/get-quiz");
 
-// const createquizRouts = require("./routes/createquiz");
-// const apiQuiziesRoute = require("./routes/api/quizzes");
-
-// api routes
-app.use("/api/quizzes", apiQuiziesRoute(db));
-
-// const quizRouts = require("./routes/quiz");
-
-// Mount all resource routes
-// Note: Feel free to replace the example routes below with your own
-
-// app.use("/api/users", usersRoutes(db));
-// app.use("/api/widgets", widgetsRoutes(db));
-
 app.use("/quiz", quizRouts(db));
 app.use("/api/quizzes", apiQuiziesRoute(db));
 app.use("/api/quiz", apiGetQuizRoute(db));
@@ -73,14 +59,13 @@ app.use("/api/quiz", apiGetQuizRoute(db));
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
 
-app.get("/", (req, res) => {
-  res.render("index");
-});
-
 app.get("/quiz/:idplusrandom", (req, res) => {
   res.render("startQuiz");
 });
 
+app.get("/", (req, res) => {
+  res.render("index");
+});
 
 app.listen(PORT, () => {
   console.log(`Quiz app listening on port ${PORT}`);
