@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 /* eslint-disable func-style */
 /* eslint-disable camelcase */
 //selecting all required elements
@@ -73,7 +74,6 @@ const bottom_ques_counter = document.querySelector("footer .total_que");
 
 // if Next Que button clicked
 next_btn.onclick = ()=>{
-  console.log(que_count, questions.length);
   if (que_count < questions.length - 1) { //if question count is less than total question length
     que_count++; //increment the que_count value
     que_numb++; //increment the que_numb value
@@ -106,17 +106,16 @@ next_btn.onclick = ()=>{
 // },
 
 async function getQuestions() {
-  const quizIdPlusRandom = window.location.pathname.replace('/quiz/', '');
-  const quizId = quizIdPlusRandom.substring(24);
-  const response = await fetch(`/api/quiz/${quizId}`);
+  const shortUrl = window.location.pathname.replace('/quiz/', '');
+  const response = await fetch(`/api/quiz/${shortUrl}`);
   const result = await response.json();
-  console.log(result);
+  const quizId = result && result.quizzes[0].id;
+
   if (result && result.questions[quizId] && result.questions[quizId].length > 0) {
     quizName = result && result.quizzes && result.quizzes[0].name,
     questions = result.questions[quizId].map((question, index) => {
       const { id } = question;
       const correctAnswer = result.answers[id] && result.answers[id].find((a) => a.iscorrect).answer;
-      console.log(correctAnswer);
       const map = {
         numb: index + 1,
         question: question.question,
@@ -125,7 +124,6 @@ async function getQuestions() {
       };
       return map;
     });
-    console.log(questions);
   }
 }
 
@@ -134,7 +132,7 @@ getQuestions().catch((e) => console.log(e));
 // getting questions and options from array
 function showQuetions(index) {
   const que_text = document.querySelector(".que_text");
-  console.log(document.querySelector('.quiz_box .title'));
+
   document.querySelector('.quiz_box .title').innerHTML = quizName;
   //creating a new span and div tag for question and option and passing the value using array index
   let que_tag = '<span>' + questions[index].numb + ". " + questions[index].question + '</span>';
@@ -166,7 +164,7 @@ function optionSelected(answer) {
   let correcAns = questions[que_count].answer; //getting correct answer from array
   const allOptions = option_list.children.length; //getting all option items
 
-  if (userAns == correcAns) { //if user selected option is equal to array's correct answer
+  if (userAns === correcAns) { //if user selected option is equal to array's correct answer
     userScore += 1; //upgrading score value with 1
     answer.classList.add("correct"); //adding green color to correct selected option
     answer.insertAdjacentHTML("beforeend", tickIconTag); //adding tick icon to correct selected option

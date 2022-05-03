@@ -4,24 +4,23 @@ const router  = express.Router();
 
 
 module.exports = (db) => {
-  router.get("/:idplusrandom", (req, res) => {
-    console.log(req.query, req.params, req.quizId);
-    const { idplusrandom } = req.params;
-    const id = idplusrandom.substring(0, 3);
+  router.get("/:shortUrl", (req, res) => {
+    //    console.log(req.query, req.params, req.quizId);
+    const { shortUrl } = req.params;
 
-    let quizzes = `
+    let quiz = `
       select * from quizzes
-      where id = $1
+      where shortUrl = $1
       order by id
     `;
-    console.log(quizzes);
+
     let questionIds = [];
     const results = {
       quizzes: [],
       questions: {},
       answers: {}
     };
-    db.query(quizzes, [id])
+    db.query(quiz, [shortUrl])
       .then(data => {
         const ids = data.rows.map((quiz) => parseInt(quiz.id));
         console.log(ids);

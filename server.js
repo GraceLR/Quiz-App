@@ -59,7 +59,7 @@ app.use("/api/quiz", apiGetQuizRoute(db));
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
 
-app.get("/quiz/:idplusrandom", (req, res) => {
+app.get("/quiz/:shortUrl", (req, res) => {
   res.render("startQuiz");
 });
 
