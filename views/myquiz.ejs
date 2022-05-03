@@ -13,8 +13,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <!-- App CSS -->
-    <!-- <link rel="stylesheet" href="/styles/layout.css" type="text/css" /> -->
-    <!-- // need to edit style sheet -->
+    <link rel="stylesheet" href="/styles/myquiz.css" type="text/css" />
+    <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
+    <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/main.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/header.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/quiztable.css" type="text/css" />
 
     <!-- External JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -38,18 +43,23 @@
 
         <form class="quizinfoform" id="quizinfoform" action="/quiz/quizinfo" method="POST">
           <!-- <label for="tweet-text">What are you humming about?</label> -->
-          <textarea name="quizname" id="quizname" placeholder="Quiz name" rows="3" cols="67"></textarea>
-          <textarea name="quizdescription" id="quizdescription" placeholder="Quiz description" rows="1" cols="67"></textarea>
-          <textarea name="quizisprivate" id="quizisprivate" placeholder="isprivate" rows="1" cols="67"></textarea>
           <div>
-            <button type="submit">Add quiz info to my quiz</button>
+          <textarea class="quizform" name="quizname" id="quizname" placeholder="Quiz name." rows="3" cols="67"></textarea>
+          </div>
+          <div><textarea class="quizform" name="quizdescription" id="quizdescription" placeholder="Quiz description." rows="1" cols="67"></textarea>
+          </div>
+          <div>
+          <textarea class="quizform" name="quizisprivate" id="quizisprivate" placeholder="Can others view your quiz? Type 'yes' if so, type 'no' if not." rows="1" cols="67"></textarea>
+          </div>
+          <div>
+            <button class="quizadd" type="submit">Start Adding Questions</button>
             <!-- <output name="counter" class="counter" id="counter" for="question-text">140</output> -->
           </div>
         </form>
 
 
         <form class="questionsform" id="questionsform" action="/quiz/questions" method="POST">
-          <!-- <label for="tweet-text">What are you humming about?</label> -->
+           <!-- <label for="tweet-text">What are you humming about?</label> -->
           <textarea name="quizquestion" id="quizquestion" placeholder="Please type your question here." rows="3" cols="67"></textarea>
           <textarea name="category" id="category" placeholder="Category of the question." rows="1" cols="67"></textarea>
           <textarea name="correctAnswer" id="correctAnswer" placeholder="Correct answer." rows="1" cols="67"></textarea>
@@ -74,20 +84,21 @@
         </select>
       </nav>
 
-
-      <section class="questions-container" id="questions-container">
-      </section>
-
-
-      <section class="myquiz-container" id="myquiz-container">
-        <span>Quiz Preview</span>
-      </section>
-
-      <section name="createquiz" id="createquiz">
-
-        <button type="button" name="createquizbutton" id="createquizbutton">Create Quiz</button>
-
-       </section>
+      <div class="parent" >
+        <div class="child"><section class="questions-container" id="questions-container">
+        </section>
+        </div>
+        <div class="child">
+        <section class="myquiz-container" id="myquiz-container">
+          <span> <h3>Quiz Preview</h3></span>
+        </section>
+        </div>
+        <div class="child">
+        <section name="createquiz" id="createquiz">
+          <button type="button" name="createquizbutton" id="createquizbutton">Create Quiz</button>
+        </section>
+        </div>
+      </div>
       <!-- <form name="createquiz" id="createquiz" action="/quiz/kanem/startquizrandom" method="POST"></form> -->
 
     </main>

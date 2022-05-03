@@ -106,11 +106,12 @@ next_btn.onclick = ()=>{
 // },
 
 async function getQuestions() {
-  const quizIdPlusRandom = window.location.pathname.replace('/quiz/', '');
-  const quizId = quizIdPlusRandom.substring(24);
-  const response = await fetch(`/api/quiz/${quizId}`);
+
+  const shortUrl = window.location.pathname.replace('/quiz/', '');
+  const response = await fetch(`/api/quiz/${shortUrl}`);
   const result = await response.json();
-  console.log(result);
+  const quizId = result && result.quizzes[0].id;
+
   if (result && result.questions[quizId] && result.questions[quizId].length > 0) {
     quizName = result && result.quizzes && result.quizzes[0].name,
     questions = result.questions[quizId].map((question, index) => {
