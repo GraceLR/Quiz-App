@@ -1,3 +1,6 @@
+/* eslint-disable no-dupe-else-if */
+/* eslint-disable no-undef */
+/* eslint-disable func-style */
 
 /*
  * Front end JS logic goes here
@@ -352,10 +355,6 @@ $(() => {
 
   $('#createquizbutton').click(function() {
 
-    window.location.href = '/quiz/' + generateRandomString(20) + 'plus' + myQuizId;
-
+    window.location.href = '/quiz/' + myQuizId + generateRandomString(20);
   });
-
-
-
 });
