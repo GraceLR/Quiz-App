@@ -63,7 +63,7 @@ app.get("/", (req, res) => {
   res.render("index");
 });
 
-app.get("/quiz/:idplusrandom", (req, res) => {
+app.get("/quiz/:randomplusid", (req, res) => {
   res.render("startQuiz");
 });
 

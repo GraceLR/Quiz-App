@@ -352,7 +352,7 @@ $(() => {
 
   $('#createquizbutton').click(function(){
 
-    window.location.href= '/quiz/' + myQuizId + generateRandomString(20);
+    window.location.href = '/quiz/' + generateRandomString(20) + 'plus' + myQuizId;
 
  })
 

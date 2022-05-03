@@ -4,10 +4,9 @@ const router  = express.Router();
 
 
 module.exports = (db) => {
-  router.get("/:idplusrandom", (req, res) => {
+  router.get("/:id", (req, res) => {
     console.log(req.query, req.params, req.quizId);
-    const { idplusrandom } = req.params;
-    const id = idplusrandom.substring(0, 3);
+    const { id } = req.params;
 
     let quizzes = `
       select * from quizzes
