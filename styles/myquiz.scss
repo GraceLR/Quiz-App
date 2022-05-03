@@ -52,6 +52,20 @@
   display: flex;
   justify-content: space-between;
 }
+.questions {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  margin: 5px;
+  color:rgb(0, 0, 0);
+  background: aliceblue;
+      border: 1px solid #84c5fe;
+      border-radius: 5px;
+      padding: 2px;
+      font-size: 17px;
+      margin-bottom: 8px;
+      margin-top: 5px;
+}
 .question {
   display: flex;
   justify-content: space-between;
@@ -64,6 +78,7 @@
       padding: 2px;
       font-size: 17px;
       margin-bottom: 8px;
+      margin-top: 5px;
 }
 .myquiz-container  {
   display: flex;
@@ -78,6 +93,7 @@
       font-size: 17px;
       margin-bottom: 8px;
 }
+
 .parent {
   border: 1px solid #84c5fe;
   margin: 5px;
