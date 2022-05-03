@@ -9,7 +9,7 @@ module.exports = (db) => {
       LEFT JOIN answers a ON qs.id = a.question_id
       where qs.id is not null AND a.id is not null
       group by q.id, qs.id
-      order by q.id desc
+      order by q.id DESC
       limit 6
     `;
     console.log(quizzes);
