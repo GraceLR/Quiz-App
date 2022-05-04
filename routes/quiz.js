@@ -1,5 +1,7 @@
+
+
 /*
- * All routes for quiz are defined here
+ * Some routes for quiz are defined here
  * Since this file is loaded in server.js into /quiz,
  *   these routes are mounted onto /quiz
  * See: https://expressjs.com/en/guide/using-middleware.html#middleware.router
@@ -90,9 +92,7 @@ module.exports = (db) => {
 
     const params = req.body;
 
-    const params4 = params.quizIsPrivate === 'true' ? true : false;
-    // console.log('params4', params4);
-    // change the way privacy was set up
+    const params4 = params.quizIsPrivate === 'yes' ? true : false;
 
     db.query(`INSERT INTO quizzes (user_id, name, shortUrl, description, isPrivate) VALUES
     ($1, $2, $3, $4, $5) RETURNING *;`, [1, params.quizName, params.shortUrl, params.quizDescription, params4])

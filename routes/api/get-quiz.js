@@ -5,7 +5,7 @@ const router  = express.Router();
 
 module.exports = (db) => {
   router.get("/:shortUrl", (req, res) => {
-    //    console.log(req.query, req.params, req.quizId);
+
     const { shortUrl } = req.params;
 
     let quiz = `
