@@ -7,6 +7,13 @@
   justify-content: center;
   align-content: space-around;
 
+  h3 a {
+    color: #000000;
+  }
+
+  a {
+    text-decoration: none;
+  }
 
   #quiz-counter,
   #quiz-buttons {
@@ -37,7 +44,7 @@
       padding: 0;
     }
 
-    .answers li a {
+    .answers li {
       color: black;
       text-decoration: none;
       pointer-events: none;

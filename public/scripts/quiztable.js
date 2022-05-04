@@ -13,7 +13,7 @@ $(document).ready(function($) {
       console.log(quiz.name);
 
       const htmlAnswers = quizAnswers.map((answer, index) => {
-        return `<li><a href="#" data-index="${index}">${answer.answer}</a></li>`;
+        return `<li>${answer.answer}</li>`;
       }).join('');
       const htmlQuestions = `
       <div class="question-container">
@@ -23,11 +23,12 @@ $(document).ready(function($) {
         </ul>
       </div>`;
 
+      const quizLink = `http://localhost:8080/quiz/${quiz.shorturl}`;
       const htmlQuiz = `
-        <div id="${divId}" class="quiz-container quiz-questions-state">
-          <h3>${quiz.name}</h3>
-          ${htmlQuestions}
-        </div>
+          <div id="${divId}" class="quiz-container quiz-questions-state">
+            <h3><a href="${quizLink}">${quiz.name}</a></h3>
+            ${htmlQuestions}
+          </div>
       `;
       $(`.quizzes`).append(htmlQuiz);
     }

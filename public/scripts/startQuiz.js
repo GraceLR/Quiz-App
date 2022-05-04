@@ -41,6 +41,7 @@ let userScore = 0;
 let counter;
 let counterLine;
 let widthValue = 0;
+const shortUrl = window.location.pathname.replace('/quiz/', '');
 
 const restart_quiz = result_box.querySelector(".buttons .restart");
 const quit_quiz = result_box.querySelector(".buttons .quit");
@@ -106,7 +107,6 @@ next_btn.onclick = ()=>{
 // },
 
 async function getQuestions() {
-  const shortUrl = window.location.pathname.replace('/quiz/', '');
   const response = await fetch(`/api/quiz/${shortUrl}`);
   const result = await response.json();
   const quizId = result && result.quizzes[0].id;
@@ -189,22 +189,55 @@ function optionSelected(answer) {
   next_btn.classList.add("show"); //show the next button if user selected any option
 }
 
+async function postResult() {
+  const response = await fetch('/api/quiz/results', {
+    method: 'POST', // *GET, POST, PUT, DELETE, etc.
+    headers: {
+      'Content-Type': 'application/json'
+      // 'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    body: JSON.stringify({
+      user_id: 3,
+      shortUrl: window.location.pathname.replace('/quiz/', ''),
+      result: userScore
+    })
+  });
+  return await response.json();
+}
+
 function showResult() {
   info_box.classList.remove("activeInfo"); //hide info box
   quiz_box.classList.remove("activeQuiz"); //hide quiz box
   result_box.classList.add("activeResult"); //show result box
   const scoreText = result_box.querySelector(".score_text");
-  if (userScore > 3) { // if user scored more than 3
+
+  postResult().then((response) => {
+    console.log(response);
+    let scoreTag = '';
+    if (userScore > 3) { // if user scored more than 3
     //creating a new span tag and passing the user score number and total question number
-    let scoreTag = '<span>and congrats! 🎉, You got <p>' + userScore + '</p> out of <p>' + questions.length + '</p></span>';
-    scoreText.innerHTML = scoreTag;  //adding new span tag inside score_Text
-  } else if (userScore > 1) { // if user scored more than 1
-    let scoreTag = '<span>and nice 😎, You got <p>' + userScore + '</p> out of <p>' + questions.length + '</p></span>';
+      scoreTag = '<span>and congrats! 🎉, You got <p>' + userScore + '</p> out of <p>' + questions.length + '</p></span>';
+    } else if (userScore > 1) { // if user scored more than 1
+      scoreTag = '<span>and nice 😎, You got <p>' + userScore + '</p> out of <p>' + questions.length + '</p></span>';
+    } else { // if user scored less than 1
+      scoreTag = `<span>and sorry 😐, You got only <p>${userScore}</p> out of <p>${questions.length}</p></span>`;
+    }
+    scoreTag = `${scoreTag}<span>of the ${quizName} quiz.</span>`;
     scoreText.innerHTML = scoreTag;
-  } else { // if user scored less than 1
-    let scoreTag = '<span>and sorry 😐, You got only <p>' + userScore + '</p> out of <p>' + questions.length + '</p></span>';
-    scoreText.innerHTML = scoreTag;
-  }
+
+    const share = `
+        <br />
+        <span>Share this result</span>
+        <span><a target="_blank" rel="noopener noreferrer"
+        href="http://localhost:8080/quiz/${shortUrl}/results/${response.attempt}">
+        http://localhost:8080/quiz/${shortUrl}/results/${response.attempt}
+        </a></span>
+    `;
+    let div = document.createElement("div");
+    div.innerHTML = share;
+
+    scoreText.append(div);
+  });
 }
 
 function startTimer(time) {
