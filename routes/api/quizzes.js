@@ -27,6 +27,7 @@ module.exports = (db) => {
         return db.query(`
           select * from quizzes
           where id  = ANY($1::int[])
+          order by id DESC
           `, [ids]
         );
       }).then((quizzesData) => {
