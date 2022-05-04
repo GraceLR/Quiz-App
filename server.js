@@ -50,9 +50,11 @@ const quizRouts = require("./routes/quiz");
 const apiQuiziesRoute = require("./routes/api/quizzes");
 const apiGetQuizRoute = require("./routes/api/get-quiz");
 
+
 app.use("/quiz", quizRouts(db));
 app.use("/api/quizzes", apiQuiziesRoute(db));
 app.use("/api/quiz", apiGetQuizRoute(db));
+
 // Note: mount other resources here, using the same pattern above
 
 // Home page
