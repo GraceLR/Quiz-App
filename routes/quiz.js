@@ -1,5 +1,7 @@
+
+
 /*
- * All routes for quiz are defined here
+ * Some routes for quiz are defined here
  * Since this file is loaded in server.js into /quiz,
  *   these routes are mounted onto /quiz
  * See: https://expressjs.com/en/guide/using-middleware.html#middleware.router
@@ -14,16 +16,16 @@ module.exports = (db) => {
   router.get("/myquiz", (req, res) => {
 
     db.query(`SELECT DISTINCT category FROM questions;`)
-    .then(data => {
+      .then(data => {
 
-      res.render("myquiz", { categories: data.rows});
+        res.render("myquiz", { categories: data.rows});
 
-    })
-    .catch(err => {
-      res
-        .status(500)
-        .json({ error: err.message });
-    });
+      })
+      .catch(err => {
+        res
+          .status(500)
+          .json({ error: err.message });
+      });
 
   });
 
@@ -90,12 +92,10 @@ module.exports = (db) => {
 
     const params = req.body;
 
-    const params4 = params.quizIsPrivate === 'true' ? true : false;
-    // console.log('params4', params4);
-    // change the way privacy was set up
+    const params4 = params.quizIsPrivate === 'yes' ? true : false;
 
-    db.query(`INSERT INTO quizzes (user_id, name, description, isPrivate) VALUES
-    ($1, $2, $3, $4) RETURNING *;`, [1, params.quizName, params.quizDescription, params4])
+    db.query(`INSERT INTO quizzes (user_id, name, shortUrl, description, isPrivate) VALUES
+    ($1, $2, $3, $4, $5) RETURNING *;`, [1, params.quizName, params.shortUrl, params.quizDescription, params4])
       .then(data => {
 
         res.send(data.rows[0]);

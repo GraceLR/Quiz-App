@@ -1,10 +1,8 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-  <title>Quiz Maker</title>
+  <title>Quizzy:TheQuizApp!</title>
 
   <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
   <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
@@ -14,11 +12,11 @@
   <link rel="stylesheet" href="/styles/quiztable.css" type="text/css" />
 
 
-
-  <!-- js -->
   <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
   <script type="text/javascript" src="/scripts/app.js"></script>
   <script type="text/javascript" src="/scripts/quiztable.js"></script>
+  <script src="https://use.fontawesome.com/44e8624826.js"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
 
   <link rel="stylesheet" href="https://raw.githubusercontent.com/jchamill/jquery-quiz/master/src/jquery.quiz.css"
     type="text/css" />
@@ -29,8 +27,15 @@
 <body>
   <%- include('partials/header') %>
     <main>
-      <h1>Create quiz just in minutes</h1>
-      <h2>Easy and Fast</h2>
+      <div class="title">Quizzy</div>
+      <h2>The Custom Quiz App</h2>
+      <a class="myquiz" href="/quiz/myquiz">Create My Quiz!</a>
+      <div class="public">
+      <h3>Public quizes to try</h3>
+      </div>
+      <div class="icon">
+      <span><i class="fa-solid fa-sort-down"></i><i class="fa-solid fa-sort-down"></i><i class="fa-solid fa-sort-down"></i></span>
+      </div>
       <%- include('partials/quiztable') %>
     </main>
 </body>

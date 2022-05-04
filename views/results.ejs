@@ -1,0 +1,46 @@
+<!-- Created By CodingNepal - www.codingnepalweb.com  -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Awesome Quiz App | CodingNepal</title>
+  <link rel="stylesheet" href="/styles/main.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/header.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/startQuiz.css">
+  <!-- FontAweome CDN Link for Icons-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+  <script src="https://use.fontawesome.com/44e8624826.js"></script>
+
+</head>
+
+<body>
+  <%- include('partials/header') %>
+    <!-- Result Box -->
+    <div class="result_box activeResult">
+      <div class="icon">
+        <i class="fas fa-crown"></i>
+      </div>
+      <div class="complete_text">
+        <%= vars.name %>
+      </div>
+      <div class="score_text">
+        <!-- Here I've inserted Score Result from JavaScript -->
+        <span>Your score: <%= vars.result.result %> / <%= vars.questionCount %></span>
+      </div>
+      <div>
+        <span>Share this result<br /> <a
+            href="http://localhost:8080/quiz/<%= vars.shorturl %>/results/<%= vars.result.id %>">
+            http://localhost:8080/quiz/<%= vars.shorturl %>/results/<%= vars.result.id %>
+          </a></span>
+      </div>
+    </div>
+
+    <!-- Inside this JavaScript file I've coded all Quiz Codes -->
+    <script src="/scripts/results.js"></script>
+
+</body>
+
+</html>

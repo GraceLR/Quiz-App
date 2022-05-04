@@ -3,11 +3,15 @@ header {
   width: 100%;
   justify-content: space-between;
   padding: 3rem 5rem 1.5rem;
-  border-bottom: 3px solid rgb(15, 3, 84);
+  background-color: #103a60;
+  border-bottom: 3px solid aliceblue;
   position: fixed; /* Set the navbar to fixed position */
   top: 0; /* Position the navbar at the top of the page */
 }
-
+.q-icon {
+  color: azure;
+  font-size: 50px
+}
 .navbar-brand,
 .nav-item {
   font-size: 30px;

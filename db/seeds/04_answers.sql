@@ -64,8 +64,8 @@ INSERT INTO answers (question_id, answer, isCorrect) VALUES (16, '1850', FALSE);
 INSERT INTO answers (question_id, answer, isCorrect) VALUES (16, '1812', TRUE);
 
 
-INSERT INTO answers (question_id, answer, isCorrect) VALUES (17, '1867', TRUE);
-INSERT INTO answers (question_id, answer, isCorrect) VALUES (17, '1776', FALSE);
+INSERT INTO answers (question_id, answer, isCorrect) VALUES (17, '1776', TRUE);
+INSERT INTO answers (question_id, answer, isCorrect) VALUES (17, '1856', FALSE);
 INSERT INTO answers (question_id, answer, isCorrect) VALUES (17, '1812', FALSE);
 
 INSERT INTO answers (question_id, answer, isCorrect) VALUES (18, '1867', FALSE);
