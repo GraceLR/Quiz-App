@@ -12,7 +12,6 @@ const generateRandomString = (length) => {
 };
 
 let shortUrl = generateRandomString(20);
-
 const escape = function(str) {
   let div = document.createElement("div");
   div.appendChild(document.createTextNode(str));
@@ -25,7 +24,7 @@ function createQuestionElement(questionData) {
     `<article class="question">
       <div class="questionfromdb" id="questionfromdb">
         <span>${escape(questionData)}</span>
-        <button name="questionfromdbbutton" id="questionfromdbbutton" type="submit">Add to my quiz</button>
+        <button name="questionfromdbbutton" id="questionfromdbbutton" type="submit">Add to Quiz</button>
       </div>
     </article>`);
 
@@ -38,12 +37,10 @@ function createMyQuizElement(answersObj) {
   const answers = Object.keys(answersObj);
 
   const $answers = $(
-    `<article class="answers">
-      <div>
-      <span>${escape(answers[0])}</span>
+    `<article id="quizpreview-answers">
+      <span style="color:#008000;">${escape(answers[0])}</span>
       <span>${escape(answers[1])}</span>
       <span>${escape(answers[2])}</span>
-      </div>
     </article>`);
 
   return $answers;
@@ -69,16 +66,14 @@ function renderQuestions(questions) {
 function renderMyQuiz(quizObj) {
 
   const myquizContainer = $('#myquiz-container');
-  // myquizContainer.empty();
+  myquizContainer.empty();
 
   const questions = Object.keys(quizObj);
 
   for (const question of questions) {
 
     myquizContainer.append($(
-      `<article class="questions">
-        <span>${escape(question)}</span>
-      </article>`));
+      `<span id= "myquizquestions">${escape(question)}</span>`));
 
     const answers = createMyQuizElement(quizObj[question]);
     myquizContainer.append(answers);
@@ -166,18 +161,14 @@ let filter = undefined;
 
 $(() => {
 
-  $("#questionsform").hide();
-  $("#questions-container").hide();
-  $("#categoryform").hide();
-  $("#myquiz-container").hide();
-  $("#createquiz").hide();
+  $("#page2").hide();
 
   $("#quizinfoform").on("submit", function(event) {
 
     event.preventDefault();
 
     // $("#error").removeAttr("style").hide();
-    $("#error").hide();
+    $("#error-page1").hide();
 
     const quizName = $('textarea#quizname').val();
     const quizDescription = $('textarea#quizdescription').val();
@@ -185,44 +176,38 @@ $(() => {
 
     if (quizName === '' || quizName === null) {
 
-      $("#error").html('Quiz name can not be empty.');
-      $("#error").show();
+      $("#error-page1").html('Quiz name can not be empty.');
+      $("#error-page1").show();
       return;
 
     } else if (quizDescription === '' || quizDescription === null) {
 
-      $("#error").html('Quiz description can not be empty.');
-      $("#error").show();
+      $("#error-page1").html('Quiz description can not be empty.');
+      $("#error-page1").show();
       return;
 
     } else if (quizIsPrivate === '' || quizIsPrivate === null) {
 
-      $("#error").html('Quiz privacy can not be empty.');
-      $("#error").show();
+      $("#error-page1").html('Quiz privacy can not be empty.');
+      $("#error-page1").show();
       return;
 
     }
 
-    $("#quizinfoform").hide();
-    $("#questionsform").show();
-    $("#questions-container").show();
-    $("#categoryform").show();
-    $("#myquiz-container").show();
-    $("#createquiz").show();
+    $("#page1").hide();
+    $("#page2").show();
 
     $.post('/quiz/quizinfo', {quizName, shortUrl, quizDescription, quizIsPrivate})
       .then(data => {
 
         myQuizId = data.id;
 
-        $('#myquiz-container').append($(
-          `<article class="quizinfo">
-            <div>
-            <span>${escape(data.name)}</span>
-            <span>${escape(data.description)}</span>
-            </div>
+        $('#myquizpreview-info').append($(
+          `<article id="quizpreview-quizinfo">
+            <span id="quizinfo">Quiz Name: ${escape(data.name)}</span>
+            <span id="quizinfo">Quiz Description: ${escape(data.description)}</span>
+            <span id="quizinfo">Quiz URL: ${escape(data.shorturl)}</span>
           </article>`));
-
 
       })
       .catch(err => {
@@ -292,49 +277,49 @@ $(() => {
     event.preventDefault();
 
     // $("#error").removeAttr("style").hide();
-    $("#error").hide();
+    $("#error-page2").hide();
 
     const quizQuestion = $('#quizquestion').val();
-    const category = $('textarea#category').val();
+    const category = $('textarea#questioncategory').val();
     const correctAnswer = $('#correctAnswer').val();
     const wrongAnswer1 = $('#wrongAnswer1').val();
     const wrongAnswer2 = $('#wrongAnswer2').val();
 
     if (quizQuestion === '' || quizQuestion === null) {
 
-      $("#error").html('Question content can not be empty.');
-      $("#error").show();
+      $("#error-page2").html('Question content can not be empty.');
+      $("#error-page2").show();
       return;
 
     } else if (category === '' || category === null) {
 
-      $("#error").html('Question category can not be empty.');
-      $("#error").show();
+      $("#error-page2").html('Question category can not be empty.');
+      $("#error-page2").show();
       return;
 
     } else if (correctAnswer === '' || correctAnswer === null) {
 
-      $("#error").html('The correct answer for the question can not be empty.');
-      $("#error").show();
+      $("#error-page2").html('The correct answer for the question can not be empty.');
+      $("#error-page2").show();
       return;
 
     } else if (wrongAnswer1 === '' || wrongAnswer1 === null) {
 
-      $("#error").html('The first wrong answer for the question can not be empty.');
-      $("#error").show();
+      $("#error-page2").html('The first wrong answer for the question can not be empty.');
+      $("#error-page2").show();
       return;
 
     } else if (wrongAnswer1 === '' || wrongAnswer1 === null) {
 
-      $("#error").html('The second wrong answer for the question can not be empty.');
-      $("#error").show();
+      $("#error-page2").html('The second wrong answer for the question can not be empty.');
+      $("#error-page2").show();
       return;
 
     }
 
 
     $('#quizquestion').val('');
-    $('textarea#category').val('');
+    $('textarea#questioncategory').val('');
     $('#correctAnswer').val('');
     $('#wrongAnswer1').val('');
     $('#wrongAnswer2').val('');
