@@ -301,19 +301,19 @@ $(() => {
 
     } else if (correctAnswer === '' || correctAnswer === null) {
 
-      $("#error-page2").html('The correct answer for the question can not be empty.');
+      $("#error-page2").html('Correct answer can not be empty.');
       $("#error-page2").show();
       return;
 
     } else if (wrongAnswer1 === '' || wrongAnswer1 === null) {
 
-      $("#error-page2").html('The first wrong answer for the question can not be empty.');
+      $("#error-page2").html('Wrong answer can not be empty.');
       $("#error-page2").show();
       return;
 
-    } else if (wrongAnswer1 === '' || wrongAnswer1 === null) {
+    } else if (wrongAnswer2 === '' || wrongAnswer2 === null) {
 
-      $("#error-page2").html('The second wrong answer for the question can not be empty.');
+      $("#error-page2").html('Wrong answer can not be empty.');
       $("#error-page2").show();
       return;
 

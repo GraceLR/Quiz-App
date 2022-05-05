@@ -35,7 +35,8 @@ const getResultsById = (db, req, res) => {
         ...quiz.rows[0],
         result
       };
-      res.render('results', { vars });
+      const loggedInUser = req.session.user_id;
+      res.render('results', { vars, loggedInUser });
     })
     .catch(err => {
       res
