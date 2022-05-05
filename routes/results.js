@@ -56,10 +56,7 @@ const getResultsById = (db, req, res) => {
         result,
         prevResult
       };
-<<<<<<< HEAD
-=======
       console.log(vars.questionCount);
->>>>>>> f69c2ccfc48a277b6690a72ef5b3d8d49701d848
       const loggedInUser = req.session.user_id;
       res.render('results', { vars, loggedInUser });
     })
