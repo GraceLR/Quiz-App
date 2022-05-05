@@ -176,7 +176,7 @@ function optionSelected(answer) {
     console.log("Wrong Answer");
 
     for (i = 0; i < allOptions; i++) {
-      if (option_list.children[i].textContent == correcAns) { //if there is an option which is matched to an array answer
+      if (option_list.children[i].textContent === correcAns) { //if there is an option which is matched to an array answer
         option_list.children[i].setAttribute("class", "option correct"); //adding green color to matched option
         option_list.children[i].insertAdjacentHTML("beforeend", tickIconTag); //adding tick icon to matched option
         console.log("Auto selected correct answer.");
@@ -213,24 +213,25 @@ function showResult() {
 
   postResult().then((response) => {
     console.log(response);
-    let scoreTag = '';
-    if (userScore > 3) { // if user scored more than 3
-    //creating a new span tag and passing the user score number and total question number
-      scoreTag = '<span>and congrats! 🎉, You got <p>' + userScore + '</p> out of <p>' + questions.length + '</p></span>';
-    } else if (userScore > 1) { // if user scored more than 1
-      scoreTag = '<span>and nice 😎, You got <p>' + userScore + '</p> out of <p>' + questions.length + '</p></span>';
-    } else { // if user scored less than 1
-      scoreTag = `<span>and sorry 😐, You got only <p>${userScore}</p> out of <p>${questions.length}</p></span>`;
-    }
-    scoreTag = `${scoreTag}<span>of the ${quizName} quiz.</span>`;
+    const completeText = `${quizName}
+      <br />
+      Attempt ${response.attempt}
+    `;
+    const scoreTag = `
+    <span>Your score: ${response.result} / ${questions.length}</span>
+    `;
+    result_box.querySelector('.complete_text').innerHTML = completeText;
     scoreText.innerHTML = scoreTag;
-
-    const share = `
+    const prevResult = response.prevResult ? `<div>
+    Your previous score is: ${response.prevResult.result}  /  ${questions.length}
+    <br /><br />
+  </div>` : '';
+    const share = ` ${prevResult}
         <br />
         <span>Share this result</span>
         <span><a target="_blank" rel="noopener noreferrer"
-        href="http://localhost:8080/quiz/${shortUrl}/results/${response.attempt}">
-        http://localhost:8080/quiz/${shortUrl}/results/${response.attempt}
+        href="http://localhost:8080/quiz/${shortUrl}/results/${response.id}">
+        http://localhost:8080/quiz/${shortUrl}/results/${response.id}
         </a></span>
     `;
     let div = document.createElement("div");
@@ -255,7 +256,7 @@ function startTimer(time) {
       const allOptions = option_list.children.length; //getting all option items
       let correcAns = questions[que_count].answer; //getting correct answer from array
       for (i = 0; i < allOptions; i++) {
-        if (option_list.children[i].textContent == correcAns) { //if there is an option which is matched to an array answer
+        if (option_list.children[i].textContent === correcAns) { //if there is an option which is matched to an array answer
           option_list.children[i].setAttribute("class", "option correct"); //adding green color to matched option
           option_list.children[i].insertAdjacentHTML("beforeend", tickIconTag); //adding tick icon to matched option
           console.log("Time Off: Auto selected correct answer.");

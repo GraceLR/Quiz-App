@@ -40,88 +40,88 @@
 
   <%- include('partials/header') %>
 
-  <main class="container" id="container">
+    <main class="container" id="container">
 
 
-    <section id="page1">
+      <section id="page1">
 
-      <div class="new-question" id="new-question">
+        <div class="new-question" id="new-question">
 
-        <form class="textbox" id="quizinfoform" action="/quiz/quizinfo" method="POST">
-          <div>
-            <textarea class="textbox" name="quizname" id="quizname" placeholder="Quiz name." rows="3"
-              cols="67"></textarea>
-          </div>
-          <div><textarea class="textbox" name="quizdescription" id="quizdescription" placeholder="Quiz description."
-              rows="1" cols="67"></textarea>
-          </div>
-          <div>
-            <textarea class="textbox" name="quizisprivate" id="quizisprivate"
-              placeholder="Can others view your quiz? Type 'yes' if so, type 'no' if not." rows="1"
-              cols="67"></textarea>
-          </div>
-          <span id="error-page1" class="errormsg"></span>
-          <div>
-            <button class="quizadd" type="submit">Start Adding Questions</button>
-          </div>
-        </form>
-
-      </div>
-
-
-    </section>
-
-
-    <section id="page2">
-      <div id="leftside">
-        <div id="leftside-child1">
-          <form class="questionsform" id="questionsform" action="/quiz/questions" method="POST">
-            <textarea class="textbox" name="quizquestion" id="quizquestion"
-              placeholder="Please type your question here." rows="3" cols="67"></textarea>
-            <textarea class="textbox" name="quizcategory" id="questioncategory" placeholder="Category of the question."
-              rows="1" cols="67"></textarea>
-            <textarea class="textbox" name="correctAnswer" id="correctAnswer" placeholder="Correct answer." rows="1"
-              cols="67"></textarea>
-            <textarea class="textbox" name="wrongAnswer1" id="wrongAnswer1" placeholder="Wrong answer." rows="1"
-              cols="67"></textarea>
-            <textarea class="textbox" name="wrongAnswer2" id="wrongAnswer2" placeholder="Wrong answer." rows="1"
-              cols="67"></textarea>
-            <span id="error-page2" class="errormsg"></span>
+          <form class="textbox" id="quizinfoform" action="/quiz/quizinfo" method="POST">
             <div>
-              <button type="submit">Add to Quiz</button>
+              <textarea class="textbox" name="quizname" id="quizname" placeholder="Quiz name." rows="3"
+                cols="67"></textarea>
+            </div>
+            <div><textarea class="textbox" name="quizdescription" id="quizdescription" placeholder="Quiz description."
+                rows="1" cols="67"></textarea>
+            </div>
+            <div>
+              <textarea class="textbox" name="quizisprivate" id="quizisprivate"
+                placeholder="Can others view your quiz? Type 'yes' if so, type 'no' if not." rows="1"
+                cols="67"></textarea>
+            </div>
+            <span id="error-page1" class="errormsg"></span>
+            <div>
+              <button class="quizadd" type="submit">Start Adding Questions</button>
             </div>
           </form>
-        </div>
-        <div id="leftside-child2">
-          <div id="leftside-child2-category">
-            <nav id="categoryform" class="categoryform">
-              <label id="category" for="category">Category:</label>
-              <select name="categoryselect" id="categoryselect">
-                <option value="defaultvalue" class="categorydefault" id="categorydefault">Select a Category</option>
-                <% for(const cat of categories) { %>
-                  <option>
-                    <%= cat['category'] %>
-                  </option>
-                  <% } %>
-              </select>
-            </nav>
-          </div>
-          <div id="leftside-child2-questions">
-            <section class="questions-container" id="questions-container"></section>
-          </div>
-        </div>
-      </div>
-      <div id="rightside">
-        <span>
-          <h3 style="margin-top: 0px;">Quiz Preview</h3>
-        </span>
-        <section id="myquizpreview-info"></section>
-        <section class="myquiz-container" id="myquiz-container"></section>
-        <button type="button" name="createquizbutton" id="createquizbutton">Create Quiz</button>
-      </div>
-    </section>
 
-  </main>
+        </div>
+
+
+      </section>
+
+
+      <section id="page2">
+        <div id="leftside">
+          <div id="leftside-child1">
+            <form class="questionsform" id="questionsform" action="/quiz/questions" method="POST">
+              <textarea class="textbox" name="quizquestion" id="quizquestion"
+                placeholder="Please type your question here." rows="3" cols="67"></textarea>
+              <textarea class="textbox" name="quizcategory" id="questioncategory"
+                placeholder="Category of the question." rows="1" cols="67"></textarea>
+              <textarea class="textbox" name="correctAnswer" id="correctAnswer" placeholder="Correct answer." rows="1"
+                cols="67"></textarea>
+              <textarea class="textbox" name="wrongAnswer1" id="wrongAnswer1" placeholder="Wrong answer." rows="1"
+                cols="67"></textarea>
+              <textarea class="textbox" name="wrongAnswer2" id="wrongAnswer2" placeholder="Wrong answer." rows="1"
+                cols="67"></textarea>
+              <span id="error-page2" class="errormsg"></span>
+              <div>
+                <button type="submit">Add to Quiz</button>
+              </div>
+            </form>
+          </div>
+          <div id="leftside-child2">
+            <div id="leftside-child2-category">
+              <nav id="categoryform" class="categoryform">
+                <label id="category" for="category">Category:</label>
+                <select name="categoryselect" id="categoryselect">
+                  <option value="defaultvalue" class="categorydefault" id="categorydefault">Select a Category</option>
+                  <% for(const cat of categories) { %>
+                    <option>
+                      <%= cat['category'] %>
+                    </option>
+                    <% } %>
+                </select>
+              </nav>
+            </div>
+            <div id="leftside-child2-questions">
+              <section class="questions-container" id="questions-container"></section>
+            </div>
+          </div>
+        </div>
+        <div id="rightside">
+          <span>
+            <h3 style="margin-top: 0px;">Quiz Preview</h3>
+          </span>
+          <section id="myquizpreview-info"></section>
+          <section class="myquiz-container" id="myquiz-container"></section>
+          <button type="button" name="createquizbutton" id="createquizbutton">Create Quiz</button>
+        </div>
+      </section>
+
+    </main>
 </body>
 
 </html>

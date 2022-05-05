@@ -4,25 +4,45 @@ const express = require('express');
 const router  = express.Router();
 
 const getResultsById = (db, req, res) => {
+  const { shortUrl } = req;
   const { attemptId } = req.params;
+  console.log(attemptId);
   const attemptQuery = attemptId ? `AND id = $2` : '';
-  const queryVars = attemptId ? ['3', attemptId] : ['3'];
+  const queryVars = attemptId ? [3, attemptId] : [3];
   let lastResult = `
     select * from quiz_attempts
-    where user_id = $1
-    ${attemptQuery}
+    WHERE
+      user_id = $1
+      ${attemptQuery}
     order by attempt DESC
     LIMIT 1
   `;
   let result = {};
+  let prevResult = {};
+  let quiz_id = null;
+
   db.query(lastResult, queryVars)
     .then(data => {
       result = data.rows && data.rows[0];
-      const { quiz_id } = result;
+      quiz_id = result.quiz_id;
       console.log(quiz_id);
+      console.log(result);
+
+      return db.query(`
+        select * from quiz_attempts
+        WHERE
+          user_id = $1
+          AND quiz_id = $2
+          AND id < $3
+        ORDER BY id DESC
+        LIMIT 1
+      `, [3, quiz_id, attemptId]);
+    }).then((prev) => {
+      prevResult = prev.rows[0];
       return db.query(
         `
-          SELECT qz.*, count(q.id) as "questionCount" FROM quizzes qz
+          SELECT qz.*, count(q.id) as "questionCount"
+          FROM quizzes qz
           LEFT JOIN questions q ON qz.id = q.quiz_id
           WHERE qz.id = $1
           GROUP BY qz.id
@@ -33,8 +53,13 @@ const getResultsById = (db, req, res) => {
       console.log(quiz.rows);
       const vars = {
         ...quiz.rows[0],
-        result
+        result,
+        prevResult
       };
+<<<<<<< HEAD
+=======
+      console.log(vars.questionCount);
+>>>>>>> f69c2ccfc48a277b6690a72ef5b3d8d49701d848
       const loggedInUser = req.session.user_id;
       res.render('results', { vars, loggedInUser });
     })
@@ -46,13 +71,13 @@ const getResultsById = (db, req, res) => {
 };
 
 
-module.exports = (db) => {
+module.exports = (db, shortUrl) => {
   router.get("/", (req, res) => {
-    getResultsById(db, req, res);
+    getResultsById(db, req, res, shortUrl);
   });
 
   router.get("/:attemptId", (req, res) => {
-    getResultsById(db, req, res);
+    getResultsById(db, req, res, shortUrl);
   });
   return router;
 };

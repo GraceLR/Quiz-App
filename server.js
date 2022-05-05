@@ -55,21 +55,23 @@ const apiGetQuizRoute = require("./routes/api/get-quiz");
 const apiPostResultsRoute = require('./routes/api/post-results');
 const resultsRoute = require("./routes/results");
 
-app.use("/quiz", quizRouts(db));
-app.use("/session", sessionRouts(db));
+
 app.use("/api/quizzes", apiQuiziesRoute(db));
+app.use("/session", sessionRouts(db));
 app.use("/api/quiz/results", apiPostResultsRoute(db));
 app.use("/api/quiz", apiGetQuizRoute(db));
-
+app.use("/quiz", quizRouts(db));
 // Note: mount other resources here, using the same pattern above
 
 // Home page
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
 
-app.use("/quiz/:shortUrl/results", resultsRoute(db));
-<<<<<<< HEAD
-=======
+
+app.use("/quiz/:shortUrl/results", function(req, res, next) {
+  req.shortUrl = req.params.shortUrl;
+  next();
+}, resultsRoute(db));
 
 app.get("/quiz/:shortUrl", (req, res) => {
 
@@ -78,7 +80,7 @@ app.get("/quiz/:shortUrl", (req, res) => {
   const link = 'http://localhost:8080/session?urlpassed=' + urlPass;
 
   if (!loggedInUser) {
->>>>>>> 7a94ee7cc289db8eca19b3b954870d59acedd898
+
 
     return res.send("Please <a href='" + link + "'>Login</a> first.");
 
@@ -88,14 +90,13 @@ app.get("/quiz/:shortUrl", (req, res) => {
 });
 
 app.get("/", (req, res) => {
-<<<<<<< HEAD
+
   res.render("index");
-=======
 
   const loggedInUser = req.session.user_id;
 
   res.render("index", {loggedInUser});
->>>>>>> 7a94ee7cc289db8eca19b3b954870d59acedd898
+
 });
 
 app.listen(PORT, () => {
