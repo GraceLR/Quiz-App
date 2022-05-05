@@ -4,10 +4,14 @@ body {
   padding-top: 180px;
   width: 100%;
   min-height: 100vh;
-  background: #84c5fe;
+  background-color: #84c5fe;
+  background-image: url("https://www.transparenttextures.com/patterns/subtle-grey.png");
+  // background: #84c5fe;
 }
 .title  {
   font-size: 100px;
+  font-weight: bold;
+  font-family: New Century Schoolbook, TeX Gyre Schola, serif;
 }
 
 main {
@@ -51,6 +55,8 @@ table {
 .public {
   color: azure;
   padding-top: 30px;
+  font-size: 20px;
+
 }
 .icon {
   font-size: 50px;
