@@ -123,7 +123,7 @@ function fetchQuestions(filter) {
 
 function fetchMyQuiz(myQuizId) {
 
-  $.ajax({
+  return $.ajax({
     url: '/quiz/data/myquizall',
     method: 'GET',
     data: {myquiz: myQuizId},
@@ -255,15 +255,48 @@ $(() => {
       const wrongAnswer1 = questionData[1].answer;
       const wrongAnswer2 = questionData[2].answer;
 
-      $.post('/quiz/questions', {myQuizId, quizQuestion, category, correctAnswer, wrongAnswer1, wrongAnswer2})
-        .then(() => {
+      $.ajax({
+        url: '/quiz/data/myquizall',
+        method: 'GET',
+        data: {myquiz: myQuizId},
+        dataType: 'json'
+      }).then(data => {
 
-          fetchMyQuiz(myQuizId);
+        let obj = {};
 
-        })
-        .catch(err => {
-          console.log(err);
-        });
+        for (const ele of data) {
+
+          const question = ele.question;
+
+          if (obj[question] === undefined) {
+
+            obj[question] = {};
+
+          }
+
+          obj[question][ele.answer] = ele.iscorrect;
+
+        }
+
+        if (data.length === 0 || !obj[quizQuestion]) {
+
+            $.post('/quiz/questions', {myQuizId, quizQuestion, category, correctAnswer, wrongAnswer1, wrongAnswer2})
+            .then(() => {
+
+              fetchMyQuiz(myQuizId);
+
+            })
+            .catch(err => {
+              console.log(err);
+            });
+
+        }
+
+      }).catch(err => {
+
+        console.log(err);
+
+      });
 
     }).catch(err => {
 
@@ -281,44 +314,51 @@ $(() => {
     // $("#error").removeAttr("style").hide();
     $("#error-page2").hide();
 
-    const quizQuestion = $('#quizquestion').val();
-    const category = $('textarea#questioncategory').val();
-    const correctAnswer = $('#correctAnswer').val();
-    const wrongAnswer1 = $('#wrongAnswer1').val();
-    const wrongAnswer2 = $('#wrongAnswer2').val();
-
-    if (quizQuestion === '' || quizQuestion === null) {
+    if ($('#quizquestion').val() === '' || $('#quizquestion').val() === null) {
 
       $("#error-page2").html('Question content can not be empty.');
       $("#error-page2").show();
       return;
 
-    } else if (category === '' || category === null) {
+    } else if ($('textarea#questioncategory').val() === '' || $('textarea#questioncategory').val() === null) {
 
       $("#error-page2").html('Question category can not be empty.');
       $("#error-page2").show();
       return;
 
-    } else if (correctAnswer === '' || correctAnswer === null) {
+    } else if ($('#correctAnswer').val() === '' || $('#correctAnswer').val() === null) {
 
       $("#error-page2").html('Correct answer can not be empty.');
       $("#error-page2").show();
       return;
 
-    } else if (wrongAnswer1 === '' || wrongAnswer1 === null) {
+    } else if ($('#wrongAnswer1').val() === '' || $('#wrongAnswer1').val() === null) {
 
       $("#error-page2").html('Wrong answer can not be empty.');
       $("#error-page2").show();
       return;
 
-    } else if (wrongAnswer2 === '' || wrongAnswer2 === null) {
+    } else if ($('#wrongAnswer2').val() === '' || $('#wrongAnswer2').val() === null) {
 
       $("#error-page2").html('Wrong answer can not be empty.');
       $("#error-page2").show();
       return;
+
+    } else if ($('#correctAnswer').val() === $('#wrongAnswer1').val() ||
+    $('#correctAnswer').val() === $('#wrongAnswer2').val() ||
+      $('#wrongAnswer1').val() === $('#wrongAnswer2').val()){
+
+        $("#error-page2").html('Answers can not be the same.');
+        $("#error-page2").show();
+        return;
 
     }
 
+    const quizQuestion = $('textarea#quizquestion').val();
+    const category = $('textarea#questioncategory').val();
+    const correctAnswer = $('textarea#correctAnswer').val();
+    const wrongAnswer1 = $('textarea#wrongAnswer1').val();
+    const wrongAnswer2 = $('textarea#wrongAnswer2').val();
 
     $('#quizquestion').val('');
     $('textarea#questioncategory').val('');
@@ -326,16 +366,48 @@ $(() => {
     $('#wrongAnswer1').val('');
     $('#wrongAnswer2').val('');
 
-    $.post('/quiz/questions', {myQuizId, quizQuestion, category, correctAnswer, wrongAnswer1, wrongAnswer2})
-      .then(() => {
+    $.ajax({
+      url: '/quiz/data/myquizall',
+      method: 'GET',
+      data: {myquiz: myQuizId},
+      dataType: 'json'
+    }).then(data => {
 
-        // fetchQuestions();
-        fetchMyQuiz(myQuizId);
+      let obj = {};
 
-      })
-      .catch(err => {
-        console.log(err);
-      });
+      for (const ele of data) {
+
+        const question = ele.question;
+
+        if (obj[question] === undefined) {
+
+          obj[question] = {};
+
+        }
+
+        obj[question][ele.answer] = ele.iscorrect;
+
+      }
+
+      if (data.length === 0 || !obj[quizQuestion]) {
+
+          $.post('/quiz/questions', {myQuizId, quizQuestion, category, correctAnswer, wrongAnswer1, wrongAnswer2})
+          .then(() => {
+
+            fetchMyQuiz(myQuizId);
+
+          })
+          .catch(err => {
+            console.log(err);
+          });
+
+      }
+
+    }).catch(err => {
+
+      console.log(err);
+
+    });
 
   });
 
