@@ -1,0 +1,31 @@
+<header class="nav-header">
+  <div class="q-icon">
+    <a href="http://localhost:8080/"> <i class="fa-brands fa-quora"></i></a>
+    </div>
+  <nav>
+    <!-- <a class="nav-item" id="login" href="/quiz/myquiz">Log in</a> -->
+
+    <% if(!loggedInUser){ %>
+      <form class="form" action="/session/in" method="POST">
+        <button type="submit" class="btn btn-primary">Login</button>
+      </form>
+      <% } else { %>
+        <% let name=undefined %>
+          <% if(loggedInUser===1){ %>
+            <% name='Alice' %>
+              <% } else { %>
+                <% name='Kira' %>
+                  <% } %>
+                    <form class="form-inline" action="/session/out" method="POST">
+                      <label id="Alice" class="mr-3" for="Hi">Hi: <%= name %></label>
+                      <button type="submit" class="btn btn-outline-dark">Logout</button>
+                    </form>
+                    <% } %>
+
+  </nav>
+
+</header>
+<head>
+  <script src="https://use.fontawesome.com/44e8624826.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
