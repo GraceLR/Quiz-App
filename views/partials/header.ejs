@@ -10,8 +10,14 @@
         <button type="submit" class="btn btn-primary">Login</button>
       </form>
     <% } else { %>
+      <% let name = undefined %>
+      <% if(loggedInUser === 1){ %>
+        <% name = 'Alice' %>
+        <% } else { %>
+          <% name = 'Kira' %>
+        <% } %>
       <form class="form-inline" action="/session/out" method="POST">
-        <label class="mr-3" for="Hi">Hi: <%= loggedInUser %></label>
+        <label class="mr-3" for="Hi">Hi: <%= name %></label>
         <button type="submit" class="btn btn-outline-dark">Logout</button>
       </form>
     <% } %>

@@ -77,8 +77,8 @@ app.get("/quiz/:shortUrl", (req, res) => {
 
   if (!loggedInUser) {
 
-
     return res.send("Please <a href='" + link + "'>Login</a> first.");
+
   }
 
   res.render("startQuiz", {loggedInUser});
