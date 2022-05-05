@@ -1,3 +1,5 @@
+/* eslint-disable func-style */
+/* eslint-disable no-undef */
 
 /*
  * Front end JS logic goes here
@@ -219,16 +221,16 @@ $(() => {
 
   fetchQuestions(filter);
 
-    $($('#categoryselect')).change(() => {
+  $($('#categoryselect')).change(() => {
 
-      const selected = $('#categoryselect').val();
+    const selected = $('#categoryselect').val();
 
-      if (selected !== $('#categorydefault').val()){
-          filter = selected;
-       }
+    if (selected !== $('#categorydefault').val()) {
+      filter = selected;
+    }
 
-       fetchQuestions(filter);
-       filter = undefined;
+    fetchQuestions(filter);
+    filter = undefined;
 
   });
 
@@ -254,14 +256,14 @@ $(() => {
       const wrongAnswer2 = questionData[2].answer;
 
       $.post('/quiz/questions', {myQuizId, quizQuestion, category, correctAnswer, wrongAnswer1, wrongAnswer2})
-      .then(() => {
+        .then(() => {
 
-        fetchMyQuiz(myQuizId);
+          fetchMyQuiz(myQuizId);
 
-      })
-      .catch(err => {
-        console.log(err);
-      });
+        })
+        .catch(err => {
+          console.log(err);
+        });
 
     }).catch(err => {
 
@@ -299,19 +301,19 @@ $(() => {
 
     } else if (correctAnswer === '' || correctAnswer === null) {
 
-      $("#error-page2").html('The correct answer for the question can not be empty.');
+      $("#error-page2").html('Correct answer can not be empty.');
       $("#error-page2").show();
       return;
 
     } else if (wrongAnswer1 === '' || wrongAnswer1 === null) {
 
-      $("#error-page2").html('The first wrong answer for the question can not be empty.');
+      $("#error-page2").html('Wrong answer can not be empty.');
       $("#error-page2").show();
       return;
 
-    } else if (wrongAnswer1 === '' || wrongAnswer1 === null) {
+    } else if (wrongAnswer2 === '' || wrongAnswer2 === null) {
 
-      $("#error-page2").html('The second wrong answer for the question can not be empty.');
+      $("#error-page2").html('Wrong answer can not be empty.');
       $("#error-page2").show();
       return;
 

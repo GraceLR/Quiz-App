@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 /* eslint-disable func-style */
 /* eslint-disable camelcase */
 //selecting all required elements
@@ -40,6 +41,7 @@ let userScore = 0;
 let counter;
 let counterLine;
 let widthValue = 0;
+const shortUrl = window.location.pathname.replace('/quiz/', '');
 
 const restart_quiz = result_box.querySelector(".buttons .restart");
 const quit_quiz = result_box.querySelector(".buttons .quit");
@@ -73,7 +75,6 @@ const bottom_ques_counter = document.querySelector("footer .total_que");
 
 // if Next Que button clicked
 next_btn.onclick = ()=>{
-  console.log(que_count, questions.length);
   if (que_count < questions.length - 1) { //if question count is less than total question length
     que_count++; //increment the que_count value
     que_numb++; //increment the que_numb value
@@ -106,8 +107,6 @@ next_btn.onclick = ()=>{
 // },
 
 async function getQuestions() {
-
-  const shortUrl = window.location.pathname.replace('/quiz/', '');
   const response = await fetch(`/api/quiz/${shortUrl}`);
   const result = await response.json();
   const quizId = result && result.quizzes[0].id;
@@ -117,7 +116,6 @@ async function getQuestions() {
     questions = result.questions[quizId].map((question, index) => {
       const { id } = question;
       const correctAnswer = result.answers[id] && result.answers[id].find((a) => a.iscorrect).answer;
-      console.log(correctAnswer);
       const map = {
         numb: index + 1,
         question: question.question,
@@ -126,7 +124,6 @@ async function getQuestions() {
       };
       return map;
     });
-    console.log(questions);
   }
 }
 
@@ -135,7 +132,7 @@ getQuestions().catch((e) => console.log(e));
 // getting questions and options from array
 function showQuetions(index) {
   const que_text = document.querySelector(".que_text");
-  console.log(document.querySelector('.quiz_box .title'));
+
   document.querySelector('.quiz_box .title').innerHTML = quizName;
   //creating a new span and div tag for question and option and passing the value using array index
   let que_tag = '<span>' + questions[index].numb + ". " + questions[index].question + '</span>';
@@ -167,7 +164,7 @@ function optionSelected(answer) {
   let correcAns = questions[que_count].answer; //getting correct answer from array
   const allOptions = option_list.children.length; //getting all option items
 
-  if (userAns == correcAns) { //if user selected option is equal to array's correct answer
+  if (userAns === correcAns) { //if user selected option is equal to array's correct answer
     userScore += 1; //upgrading score value with 1
     answer.classList.add("correct"); //adding green color to correct selected option
     answer.insertAdjacentHTML("beforeend", tickIconTag); //adding tick icon to correct selected option
@@ -192,22 +189,55 @@ function optionSelected(answer) {
   next_btn.classList.add("show"); //show the next button if user selected any option
 }
 
+async function postResult() {
+  const response = await fetch('/api/quiz/results', {
+    method: 'POST', // *GET, POST, PUT, DELETE, etc.
+    headers: {
+      'Content-Type': 'application/json'
+      // 'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    body: JSON.stringify({
+      user_id: 3,
+      shortUrl: window.location.pathname.replace('/quiz/', ''),
+      result: userScore
+    })
+  });
+  return await response.json();
+}
+
 function showResult() {
   info_box.classList.remove("activeInfo"); //hide info box
   quiz_box.classList.remove("activeQuiz"); //hide quiz box
   result_box.classList.add("activeResult"); //show result box
   const scoreText = result_box.querySelector(".score_text");
-  if (userScore > 3) { // if user scored more than 3
+
+  postResult().then((response) => {
+    console.log(response);
+    let scoreTag = '';
+    if (userScore > 3) { // if user scored more than 3
     //creating a new span tag and passing the user score number and total question number
-    let scoreTag = '<span>and congrats! 🎉, You got <p>' + userScore + '</p> out of <p>' + questions.length + '</p></span>';
-    scoreText.innerHTML = scoreTag;  //adding new span tag inside score_Text
-  } else if (userScore > 1) { // if user scored more than 1
-    let scoreTag = '<span>and nice 😎, You got <p>' + userScore + '</p> out of <p>' + questions.length + '</p></span>';
+      scoreTag = '<span>and congrats! 🎉, You got <p>' + userScore + '</p> out of <p>' + questions.length + '</p></span>';
+    } else if (userScore > 1) { // if user scored more than 1
+      scoreTag = '<span>and nice 😎, You got <p>' + userScore + '</p> out of <p>' + questions.length + '</p></span>';
+    } else { // if user scored less than 1
+      scoreTag = `<span>and sorry 😐, You got only <p>${userScore}</p> out of <p>${questions.length}</p></span>`;
+    }
+    scoreTag = `${scoreTag}<span>of the ${quizName} quiz.</span>`;
     scoreText.innerHTML = scoreTag;
-  } else { // if user scored less than 1
-    let scoreTag = '<span>and sorry 😐, You got only <p>' + userScore + '</p> out of <p>' + questions.length + '</p></span>';
-    scoreText.innerHTML = scoreTag;
-  }
+
+    const share = `
+        <br />
+        <span>Share this result</span>
+        <span><a target="_blank" rel="noopener noreferrer"
+        href="http://localhost:8080/quiz/${shortUrl}/results/${response.attempt}">
+        http://localhost:8080/quiz/${shortUrl}/results/${response.attempt}
+        </a></span>
+    `;
+    let div = document.createElement("div");
+    div.innerHTML = share;
+
+    scoreText.append(div);
+  });
 }
 
 function startTimer(time) {

@@ -1,4 +1,3 @@
-
 INSERT INTO quizzes (user_id, name, shortUrl, description, category, isPrivate) VALUES(1, 'Canadian Geography', '4Ac6cGAShqqGEficlQeX', 'Do you know the capitals of these provinces?', 'Geography', FALSE);
 INSERT INTO quizzes (user_id, name, shortUrl, description, category, isPrivate) VALUES(1, 'Sports Teams Locations', 'kHRSnVSNu3DYno7rYeSP', 'Do you know which cities these teams are located in?', 'Geography', FALSE);
 INSERT INTO quizzes (user_id, name, shortUrl,  description, category, isPrivate) VALUES(2, 'World Geography', 'opdMauTbyQbPdTr4PjHg','Do you know the capitals of these countries?', 'Geography', FALSE);

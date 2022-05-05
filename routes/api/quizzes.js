@@ -7,7 +7,9 @@ module.exports = (db) => {
       select distinct q.id, count(a.id) from quizzes q
       LEFT JOIN questions qs ON q.id = qs.quiz_id
       LEFT JOIN answers a ON qs.id = a.question_id
-      where qs.id is not null AND a.id is not null
+      where
+        qs.id is not null AND a.id is not null
+        AND q.isPrivate = FALSE
       group by q.id, qs.id
       order by q.id DESC
       limit 6
@@ -25,6 +27,7 @@ module.exports = (db) => {
         return db.query(`
           select * from quizzes
           where id  = ANY($1::int[])
+          order by id DESC
           `, [ids]
         );
       }).then((quizzesData) => {

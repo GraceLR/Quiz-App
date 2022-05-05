@@ -15,10 +15,18 @@ module.exports = (db) => {
 
   router.get("/myquiz", (req, res) => {
 
+    const loggedInUser = req.session.user_id;
+
+    if (!loggedInUser) {
+
+      return res.redirect('/');
+
+    }
+
     db.query(`SELECT DISTINCT category FROM questions;`)
       .then(data => {
 
-        res.render("myquiz", { categories: data.rows});
+        res.render("myquiz", { categories: data.rows, loggedInUser: loggedInUser });
 
       })
       .catch(err => {
@@ -196,4 +204,3 @@ module.exports = (db) => {
   return router;
 
 };
-

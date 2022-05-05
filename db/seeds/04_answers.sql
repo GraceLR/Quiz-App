@@ -45,3 +45,71 @@ INSERT INTO answers (question_id, answer, isCorrect) VALUES (11, 'Banglore', FAL
 INSERT INTO answers (question_id, answer, isCorrect) VALUES (12, 'Washington DC', TRUE);
 INSERT INTO answers (question_id, answer, isCorrect) VALUES (12, 'Philidelhpia', FALSE);
 INSERT INTO answers (question_id, answer, isCorrect) VALUES (12, 'New York', FALSE);
+
+
+INSERT INTO answers (question_id, answer, isCorrect) VALUES (13, '1867', TRUE);
+INSERT INTO answers (question_id, answer, isCorrect) VALUES (13, '1776', FALSE);
+INSERT INTO answers (question_id, answer, isCorrect) VALUES (13, '1812', FALSE);
+
+INSERT INTO answers (question_id, answer, isCorrect) VALUES (14, '1867', FALSE);
+INSERT INTO answers (question_id, answer, isCorrect) VALUES (14, '1914', TRUE);
+INSERT INTO answers (question_id, answer, isCorrect) VALUES (14, '1918', FALSE);
+
+INSERT INTO answers (question_id, answer, isCorrect) VALUES (15, '1945', FALSE);
+INSERT INTO answers (question_id, answer, isCorrect) VALUES (15, '1952', FALSE);
+INSERT INTO answers (question_id, answer, isCorrect) VALUES (15, '1939', TRUE);
+
+INSERT INTO answers (question_id, answer, isCorrect) VALUES (16, '1820', FALSE);
+INSERT INTO answers (question_id, answer, isCorrect) VALUES (16, '1850', FALSE);
+INSERT INTO answers (question_id, answer, isCorrect) VALUES (16, '1812', TRUE);
+
+
+INSERT INTO answers (question_id, answer, isCorrect) VALUES (17, '1867', TRUE);
+INSERT INTO answers (question_id, answer, isCorrect) VALUES (17, '1776', FALSE);
+INSERT INTO answers (question_id, answer, isCorrect) VALUES (17, '1812', FALSE);
+
+INSERT INTO answers (question_id, answer, isCorrect) VALUES (18, '1867', FALSE);
+INSERT INTO answers (question_id, answer, isCorrect) VALUES (18, '1845', TRUE);
+INSERT INTO answers (question_id, answer, isCorrect) VALUES (18, '1918', FALSE);
+
+INSERT INTO answers (question_id, answer, isCorrect) VALUES (19, '1945', FALSE);
+INSERT INTO answers (question_id, answer, isCorrect) VALUES (19, '1942', FALSE);
+INSERT INTO answers (question_id, answer, isCorrect) VALUES (19, '1941', TRUE);
+
+INSERT INTO answers (question_id, answer, isCorrect) VALUES (20, '1960', FALSE);
+INSERT INTO answers (question_id, answer, isCorrect) VALUES (20, '1950', FALSE);
+INSERT INTO answers (question_id, answer, isCorrect) VALUES (20, '1955', TRUE);
+
+
+INSERT INTO answers (question_id, answer, isCorrect) VALUES (21, 'Oxygen', TRUE);
+INSERT INTO answers (question_id, answer, isCorrect) VALUES (21, 'Oganesson', FALSE);
+INSERT INTO answers (question_id, answer, isCorrect) VALUES (21, 'Osmium', FALSE);
+
+INSERT INTO answers (question_id, answer, isCorrect) VALUES (22, 'Phosphorus', FALSE);
+INSERT INTO answers (question_id, answer, isCorrect) VALUES (22, 'Lead', TRUE);
+INSERT INTO answers (question_id, answer, isCorrect) VALUES (22, 'Paladium', FALSE);
+
+INSERT INTO answers (question_id, answer, isCorrect) VALUES (23, 'G', FALSE);
+INSERT INTO answers (question_id, answer, isCorrect) VALUES (23, 'Go', FALSE);
+INSERT INTO answers (question_id, answer, isCorrect) VALUES (23, 'Au', TRUE);
+
+INSERT INTO answers (question_id, answer, isCorrect) VALUES (24, 'K', FALSE);
+INSERT INTO answers (question_id, answer, isCorrect) VALUES (24, 'Not a real element!', FALSE);
+INSERT INTO answers (question_id, answer, isCorrect) VALUES (24, 'Kr', TRUE);
+
+
+INSERT INTO answers (question_id, answer, isCorrect) VALUES (25, 'Cellular Memebrane', TRUE);
+INSERT INTO answers (question_id, answer, isCorrect) VALUES (25, 'Cell Wall', FALSE);
+INSERT INTO answers (question_id, answer, isCorrect) VALUES (25, 'Ganglia', FALSE);
+
+INSERT INTO answers (question_id, answer, isCorrect) VALUES (26, 'Nuclear Envelope', FALSE);
+INSERT INTO answers (question_id, answer, isCorrect) VALUES (26, 'Nucleus', TRUE);
+INSERT INTO answers (question_id, answer, isCorrect) VALUES (26, 'Centriole', FALSE);
+
+INSERT INTO answers (question_id, answer, isCorrect) VALUES (27, 'Vesicles', FALSE);
+INSERT INTO answers (question_id, answer, isCorrect) VALUES (27, 'Nucleus', FALSE);
+INSERT INTO answers (question_id, answer, isCorrect) VALUES (27, 'Mitochrondrion', TRUE);
+
+INSERT INTO answers (question_id, answer, isCorrect) VALUES (28, 'Cellular duplication', FALSE);
+INSERT INTO answers (question_id, answer, isCorrect) VALUES (28, 'Meisosis', FALSE);
+INSERT INTO answers (question_id, answer, isCorrect) VALUES (28, 'Mitosis', TRUE);
