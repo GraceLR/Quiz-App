@@ -4,8 +4,12 @@ header {
   justify-content: space-between;
   padding: 3rem 5rem 1.5rem;
   border-bottom: 3px solid rgb(15, 3, 84);
-  position: fixed; /* Set the navbar to fixed position */
-  top: 0; /* Position the navbar at the top of the page */
+  position: fixed;
+  /* Set the navbar to fixed position */
+  top: 0;
+  /* Position the navbar at the top of the page */
+  z-index: 1;
+  background-color: red;
 }
 
 .navbar-brand,

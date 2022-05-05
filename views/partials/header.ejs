@@ -3,8 +3,25 @@
     <span><a href="/">Quiz Maker</a></span>
   </div>
   <nav>
-    <a class="nav-item" href="/quiz/myquiz">Log in</a>
-    <a class="nav-item">Log out</a>
+    <!-- <a class="nav-item" id="login" href="/quiz/myquiz">Log in</a> -->
+
+    <% if(!loggedInUser){ %>
+      <form class="form" action="/session/in" method="POST">
+        <button type="submit" class="btn btn-primary">Login</button>
+      </form>
+      <% } else { %>
+        <% let name=undefined %>
+          <% if(loggedInUser===1){ %>
+            <% name='Alice' %>
+              <% } else { %>
+                <% name='Kira' %>
+                  <% } %>
+                    <form class="form-inline" action="/session/out" method="POST">
+                      <label class="mr-3" for="Hi">Hi: <%= name %></label>
+                      <button type="submit" class="btn btn-outline-dark">Logout</button>
+                    </form>
+                    <% } %>
+
   </nav>
 
 </header>

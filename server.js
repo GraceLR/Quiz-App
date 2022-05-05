@@ -7,8 +7,10 @@ const PORT = process.env.PORT || 8080;
 const sassMiddleware = require("./lib/sass-middleware");
 const express = require("express");
 const app = express();
+const cookieSession = require("cookie-session");
 const morgan = require("morgan");
 app.use(express.json());
+app.use(cookieSession({ name: "session", secret: "purple-dinosaur" }));
 
 // PG database client/connection setup
 const { Pool } = require("pg");
@@ -47,6 +49,7 @@ app.use(express.static("public"));
 // const widgetsRoutes = require("./routes/widgets");
 
 const quizRouts = require("./routes/quiz");
+const sessionRouts = require("./routes/session");
 const apiQuiziesRoute = require("./routes/api/quizzes");
 const apiGetQuizRoute = require("./routes/api/get-quiz");
 const apiPostResultsRoute = require('./routes/api/post-results');
@@ -54,6 +57,7 @@ const resultsRoute = require("./routes/results");
 
 
 app.use("/api/quizzes", apiQuiziesRoute(db));
+app.use("/session", sessionRouts(db));
 app.use("/api/quiz/results", apiPostResultsRoute(db));
 app.use("/api/quiz", apiGetQuizRoute(db));
 app.use("/quiz", quizRouts(db));
@@ -69,12 +73,25 @@ app.use("/quiz/:shortUrl/results", function(req, res, next) {
 }, resultsRoute(db));
 
 app.get("/quiz/:shortUrl", (req, res) => {
-  res.render("startQuiz");
+
+  const loggedInUser = req.session.user_id;
+  const urlPass = req.params.shortUrl;
+  const link = 'http://localhost:8080/session?urlpassed=' + urlPass;
+
+  if (!loggedInUser) {
+
+    return res.send("Please <a href='" + link + "'>Login</a> first.");
+
+  }
+
+  res.render("startQuiz", {loggedInUser});
 });
 
-
 app.get("/", (req, res) => {
-  res.render("index");
+
+  const loggedInUser = req.session.user_id;
+
+  res.render("index", {loggedInUser});
 });
 
 app.listen(PORT, () => {

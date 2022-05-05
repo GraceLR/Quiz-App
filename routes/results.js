@@ -57,7 +57,8 @@ const getResultsById = (db, req, res) => {
         prevResult
       };
       console.log(vars.questionCount);
-      res.render('results', { vars });
+      const loggedInUser = req.session.user_id;
+      res.render('results', { vars, loggedInUser });
     })
     .catch(err => {
       res
