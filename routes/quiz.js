@@ -100,7 +100,7 @@ module.exports = (db) => {
 
     const params = req.body;
 
-    const params4 = params.quizIsPrivate === 'yes' ? true : false;
+    const params4 = params.quizIsPrivate === 'yes' ? false : true;
 
     db.query(`INSERT INTO quizzes (user_id, name, shortUrl, description, isPrivate) VALUES
     ($1, $2, $3, $4, $5) RETURNING *;`, [1, params.quizName, params.shortUrl, params.quizDescription, params4])
