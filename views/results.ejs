@@ -22,18 +22,26 @@
         <i class="fas fa-crown"></i>
       </div>
       <div class="complete_text">
-        <%= vars.name %>
+        <%= vars.name %><br />
+          Attempt #<%= vars.result.attempt %>
       </div>
       <div class="score_text">
         <!-- Here I've inserted Score Result from JavaScript -->
         <span>Your score: <%= vars.result.result %> / <%= vars.questionCount %></span>
       </div>
-      <div>
-        <span>Share this result<br /> <a
-            href="http://localhost:8080/quiz/<%= vars.shorturl %>/results/<%= vars.result.id %>">
-            http://localhost:8080/quiz/<%= vars.shorturl %>/results/<%= vars.result.id %>
-          </a></span>
-      </div>
+      <% if (vars.prevResult) { %>
+        <div>
+          Your previous score is: <%= vars.prevResult.result %> / <%= vars.questionCount %>
+              <br /><br />
+        </div>
+        <% } %>
+
+          <div>
+            <span>Share this result<br /> <a
+                href="http://localhost:8080/quiz/<%= vars.shorturl %>/results/<%= vars.result.id %>">
+                http://localhost:8080/quiz/<%= vars.shorturl %>/results/<%= vars.result.id %>
+              </a></span>
+          </div>
     </div>
 
     <!-- Inside this JavaScript file I've coded all Quiz Codes -->

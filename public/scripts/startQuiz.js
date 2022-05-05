@@ -213,24 +213,25 @@ function showResult() {
 
   postResult().then((response) => {
     console.log(response);
-    let scoreTag = '';
-    if (userScore > 3) { // if user scored more than 3
-    //creating a new span tag and passing the user score number and total question number
-      scoreTag = '<span>and congrats! 🎉, You got <p>' + userScore + '</p> out of <p>' + questions.length + '</p></span>';
-    } else if (userScore > 1) { // if user scored more than 1
-      scoreTag = '<span>and nice 😎, You got <p>' + userScore + '</p> out of <p>' + questions.length + '</p></span>';
-    } else { // if user scored less than 1
-      scoreTag = `<span>and sorry 😐, You got only <p>${userScore}</p> out of <p>${questions.length}</p></span>`;
-    }
-    scoreTag = `${scoreTag}<span>of the ${quizName} quiz.</span>`;
+    const completeText = `${quizName}
+      <br />
+      Attempt ${response.attempt}
+    `;
+    const scoreTag = `
+    <span>Your score: ${response.result} / ${questions.length}</span>
+    `;
+    result_box.querySelector('.complete_text').innerHTML = completeText;
     scoreText.innerHTML = scoreTag;
-
-    const share = `
+    const prevResult = response.prevResult ? `<div>
+    Your previous score is: ${response.prevResult.result}  /  ${questions.length}
+    <br /><br />
+  </div>` : '';
+    const share = ` ${prevResult}
         <br />
         <span>Share this result</span>
         <span><a target="_blank" rel="noopener noreferrer"
-        href="http://localhost:8080/quiz/${shortUrl}/results/${response.attempt}">
-        http://localhost:8080/quiz/${shortUrl}/results/${response.attempt}
+        href="http://localhost:8080/quiz/${shortUrl}/results/${response.id}">
+        http://localhost:8080/quiz/${shortUrl}/results/${response.id}
         </a></span>
     `;
     let div = document.createElement("div");
