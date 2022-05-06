@@ -116,16 +116,18 @@ async function getQuestions() {
     questions = result.questions[quizId].map((question, index) => {
       const { id } = question;
       const correctAnswer = result.answers[id] && result.answers[id].find((a) => a.iscorrect).answer;
+      let options = result.answers[id].map((answer) => answer.answer);
       const map = {
         numb: index + 1,
         question: question.question,
         answer: correctAnswer,
-        options: result.answers[id].map((answer) => answer.answer)
+        options,
       };
       return map;
     });
   }
 }
+
 
 getQuestions().catch((e) => console.log(e));
 
@@ -138,7 +140,8 @@ function showQuetions(index) {
   let que_tag = '<span>' + questions[index].numb + ". " + questions[index].question + '</span>';
 
   let option_tag = '';
-  for (const option of questions[index].options) {
+  const options = questions[index].options.sort(() => Math.random() - 0.5);
+  for (const option of options) {
     option_tag += `<div class="option"><span>${option}</span></div>`;
   }
 
