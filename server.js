@@ -73,11 +73,12 @@ app.use("/quiz/:shortUrl/results", function(req, res, next) {
   next();
 }, resultsRoute(db));
 
+
 app.get("/quiz/:shortUrl", (req, res) => {
 
   const loggedInUser = req.session.user_id;
-  const urlPass = req.params.shortUrl;
-  const link = 'http://localhost:8080/session?urlpassed=' + urlPass;
+  const shortUrl = req.params.shortUrl;
+  const link = 'http://localhost:8080/session?urlpassed=' + shortUrl;
 
   if (!loggedInUser) {
 
@@ -86,7 +87,7 @@ app.get("/quiz/:shortUrl", (req, res) => {
 
   }
 
-  res.render("startQuiz", {loggedInUser});
+  res.render("startQuiz", {loggedInUser,shortUrl});
 });
 
 app.get("/", (req, res) => {

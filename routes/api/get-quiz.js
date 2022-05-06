@@ -51,9 +51,7 @@ module.exports = (db) => {
           for (let n = 0; n < questionIds.length; n += 1) {
             const questionId = questionIds[n];
             const answerGroup = answers.rows.filter((a) => a.question_id === questionId);
-            answerGroup.sort((a,b) => {
-              return a.id - b.id;
-            });
+
             results.answers[questionId] = answerGroup;
           }
         }
