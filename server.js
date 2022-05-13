@@ -67,6 +67,7 @@ app.use("/quiz", quizRouts(db));
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
 
+
 app.use("/quiz/:shortUrl/results", function(req, res, next) {
   req.shortUrl = req.params.shortUrl;
   next();
@@ -81,6 +82,7 @@ app.get("/quiz/:shortUrl", (req, res) => {
 
   if (!loggedInUser) {
 
+
     return res.send("Please <a href='" + link + "'>Login</a> first.");
 
   }
@@ -90,9 +92,12 @@ app.get("/quiz/:shortUrl", (req, res) => {
 
 app.get("/", (req, res) => {
 
+  res.render("index");
+
   const loggedInUser = req.session.user_id;
 
   res.render("index", {loggedInUser});
+
 });
 
 app.listen(PORT, () => {

@@ -3,15 +3,36 @@ header {
   width: 100%;
   justify-content: space-between;
   padding: 3rem 5rem 1.5rem;
-  border-bottom: 3px solid rgb(15, 3, 84);
-  position: fixed;
-  /* Set the navbar to fixed position */
-  top: 0;
-  /* Position the navbar at the top of the page */
-  z-index: 1;
-  background-color: red;
+  background-color: #103a60;
+  background-image: url("https://www.transparenttextures.com/patterns/classy-fabric.png");
+  border-bottom: 3px solid aliceblue;
+  position: fixed; /* Set the navbar to fixed position */
+  top: 0; /* Position the navbar at the top of the page */
+}
+.q-icon {
+  color: azure;
+  font-size: 50px;
+  font-weight: bold;
+  /* unvisited link */
+  a:link {
+  color: aliceblue;
+  }
+
+  /* visited link */
+  a:visited {
+  color: aliceblue;
 }
 
+/* mouse over link */
+a:hover {
+  color: #84c5fe;
+}
+
+/* selected link */
+a:active {
+  color: blue;
+}
+}
 .navbar-brand,
 .nav-item {
   font-size: 30px;
@@ -25,4 +46,9 @@ header {
 
 .nav-item {
   margin: 0 1.5rem;
+}
+
+#Alice {
+  color: aliceblue;
+  font-size: 20px;
 }
